@@ -3,12 +3,28 @@ package codigos;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Motorista {
+public class Motorista extends Usuario {
     private Veiculo veiculoDeTransporte;
     private LinkedList passageiros;
     private String regiao;
     private LinkedList horarios;
-    int id;    
+    private int id_motorista;    
+
+    public int getId_motorista() {
+        return id_motorista;
+    }
+
+    public void setId_motorista(int id) {
+        this.id_motorista = id;
+    }
+
+    public Motorista() {
+    }
+
+    public Motorista(Veiculo veiculoDeTransporte, String regiao) {
+        this.veiculoDeTransporte = veiculoDeTransporte;
+        this.regiao = regiao;
+    }
     
     public void addPassageiro (Passageiro passageiro) {
         

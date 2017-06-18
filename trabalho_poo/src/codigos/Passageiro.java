@@ -3,9 +3,20 @@ package codigos;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Passageiro {
+public class Passageiro extends Usuario{
     private LinkedList horarios;
-    int id;
+    private int id_passageiro;
+
+    public int getId_passageiro() {
+        return id_passageiro;
+    }
+
+    public void setId_passageiro(int id) {
+        this.id_passageiro = id;
+    }
+
+    public Passageiro() {
+    }
     
     public void addHorario (HorarioPassageiro horario) {
         

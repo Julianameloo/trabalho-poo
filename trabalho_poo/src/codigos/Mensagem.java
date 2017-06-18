@@ -5,6 +5,23 @@ public class Mensagem {
     private Usuario remetente;
     private Usuario destinatario;
     int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Mensagem() {
+    }
+
+    public Mensagem(String mensagem, Usuario remetente, Usuario destinatario) {
+        this.mensagem = mensagem;
+        this.remetente = remetente;
+        this.destinatario = destinatario;
+    }
     
     public String getMensagem() {
         return mensagem;

@@ -3,7 +3,7 @@ package codigos;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class HorarioMotorista {
+public class HorarioMotorista extends Horario{
     private LinkedList passageiros;
     private LinkedList passageirosConfirmados;
     

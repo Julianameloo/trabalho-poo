@@ -1,11 +1,12 @@
 package codigos;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Usuario {
     private String nome;
-    private Data dataDeNascimento;
+    private Date dataDeNascimento;
     private String login;
     private String senha;
     private String cpf;
@@ -13,6 +14,29 @@ public class Usuario {
     private LinkedList instituicoes;
     private String cep;
     private Mensagem mensagens;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public Usuario() {
+    }
+
+    public Usuario(String nome, Date dataDeNascimento, String login, String senha, String cpf, String enderecoResidencia, String cep, Mensagem mensagens) {
+        this.nome = nome;
+        this.dataDeNascimento = dataDeNascimento;
+        this.login = login;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.enderecoResidencia = enderecoResidencia;
+        this.cep = cep;
+        this.mensagens = mensagens;
+    }
     
     public void mudarSenha (String senhaAntiga, String senhaNova) {
         
@@ -42,11 +66,11 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public Data getDataDeNascimento() {
+    public Date getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(Data dataDeNascimento) {
+    public void setDataDeNascimento(Date dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
