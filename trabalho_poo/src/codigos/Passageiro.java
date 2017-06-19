@@ -1,6 +1,5 @@
 package codigos;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Passageiro extends Usuario{

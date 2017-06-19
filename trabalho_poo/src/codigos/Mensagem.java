@@ -1,10 +1,21 @@
 package codigos;
 
+import java.util.Date;
+
 public class Mensagem {
-    private String mensagem;
+    private String conteudo;
     private Usuario remetente;
     private Usuario destinatario;
+    private Date dataHora;
     int id;
+
+    public Date getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(Date dataHora) {
+        this.dataHora = dataHora;
+    }
 
     public int getId() {
         return id;
@@ -18,17 +29,17 @@ public class Mensagem {
     }
 
     public Mensagem(String mensagem, Usuario remetente, Usuario destinatario) {
-        this.mensagem = mensagem;
+        this.conteudo = mensagem;
         this.remetente = remetente;
         this.destinatario = destinatario;
     }
     
-    public String getMensagem() {
-        return mensagem;
+    public String getConteudo() {
+        return conteudo;
     }
 
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
+    public void setConteudo(String mensagem) {
+        this.conteudo = mensagem;
     }
 
     public Usuario getRemetente() {

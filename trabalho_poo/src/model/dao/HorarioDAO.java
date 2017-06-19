@@ -9,6 +9,7 @@ import codigos.Horario;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import javax.swing.JOptionPane;
@@ -32,7 +33,6 @@ public class HorarioDAO {
         }
         
     }
-    
     public void atualizar(Horario h){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -66,5 +66,30 @@ public class HorarioDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
         
+    }
+    public Horario buscar(int id){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Horario h = new Horario();
+        h.setId(-1);
+        try {
+            stmt = con.prepareStatement("SELECT * FROM horario WHERE id = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                h.setId(rs.getInt("id"));
+                h.setDia(rs.getInt("dia"));
+                h.setHoraFinal(rs.getDate("horaFinal"));
+                h.setHoraInicio(rs.getDate("horaInicio"));
+                h.setTipo(rs.getBoolean("tipo"));
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return h;
     }
 }

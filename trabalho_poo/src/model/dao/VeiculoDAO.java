@@ -9,6 +9,7 @@ import codigos.Veiculo;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -66,5 +67,30 @@ public class VeiculoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
         
+    }
+    
+    public Veiculo buscar(int id){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Veiculo v = new Veiculo();
+        v.setId(-1);
+        try {
+            stmt = con.prepareStatement("SELECT * FROM veiculo WHERE id = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                v.setId(rs.getInt("id"));
+                v.setModelo(rs.getString("modelo"));
+                v.setPlaca(rs.getString("placa"));
+                v.setCapacidade(rs.getInt("capacidade"));
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return v;
     }
 }

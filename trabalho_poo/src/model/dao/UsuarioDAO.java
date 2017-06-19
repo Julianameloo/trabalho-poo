@@ -38,13 +38,13 @@ public class UsuarioDAO {
         }
         
     }
-    public LinkedList ler(){
+    public LinkedList buscar(){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
         LinkedList usuarios = new LinkedList();
-        
+     
         try {
             stmt = con.prepareStatement("SELECT * FROM usuario");
             rs = stmt.executeQuery();
@@ -68,6 +68,69 @@ public class UsuarioDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return usuarios;
+    }
+    
+    /*public LinkedList buscar(String nome){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        LinkedList usuarios = new LinkedList();
+     
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE nome = ?");
+            stmt.setString(1, nome);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Usuario u = new Usuario();
+                u.setId(rs.getInt("id"));
+                u.setCep(rs.getString("cep"));
+                u.setCpf(rs.getString("cpf"));
+                u.setDataDeNascimento(rs.getDate("dataDeNascimento"));
+                u.setEnderecoResidencia(rs.getString("enderecoResidencia"));
+                u.setLogin(rs.getString("login"));
+                u.setNome(rs.getString("nome"));
+                u.setSenha(rs.getString("senha"));
+                usuarios.add(u);
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return usuarios;
+    }*/
+    
+    public Usuario buscar(int id){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Usuario u = new Usuario();
+        u.setId(-1);
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE id = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                u.setId(rs.getInt("id"));
+                u.setCep(rs.getString("cep"));
+                u.setCpf(rs.getString("cpf"));
+                u.setDataDeNascimento(rs.getDate("dataDeNascimento"));
+                u.setEnderecoResidencia(rs.getString("enderecoResidencia"));
+                u.setLogin(rs.getString("login"));
+                u.setNome(rs.getString("nome"));
+                u.setSenha(rs.getString("senha"));
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return u;
     }
     
     public void atualizar(Usuario u){
@@ -106,5 +169,28 @@ public class UsuarioDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
         
+    }
+    
+    public int verificarSenha(String login, String senha){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int id = -1;
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE login = ? and senha = ?");
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                id = rs.getInt("id");
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return id;
     }
 }
