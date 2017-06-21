@@ -6,11 +6,14 @@
 package model.dao;
 
 import codigos.Motorista;
+import codigos.Usuario;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 public class MotoristaDAO {
@@ -25,6 +28,7 @@ public class MotoristaDAO {
            JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+            throw new RuntimeException("Falha ao cadastrar: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -62,11 +66,11 @@ public class MotoristaDAO {
         }
         
     }
-    public boolean verificaMotorista(int id_usuario){
+    public int verificaMotorista(int id_usuario){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        boolean verifica = false;
+        int id = -1;
         
         try {
             stmt = con.prepareStatement("SELECT * FROM motorista WHERE usuario = ?");
@@ -74,7 +78,7 @@ public class MotoristaDAO {
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                verifica = true;
+                id = rs.getInt("id");
             }
             
         } catch (SQLException ex) {
@@ -82,6 +86,71 @@ public class MotoristaDAO {
         }finally{
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-        return verifica;
+        return id;
+    }
+    public Motorista buscar(int id){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        UsuarioDAO udao = new UsuarioDAO();
+        Usuario u = new Usuario();
+        Motorista m = new Motorista();
+        m.setId_motorista(-1);
+        try {
+            stmt = con.prepareStatement("SELECT * FROM motorista WHERE id = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                m.setId_motorista(rs.getInt("id"));
+                m.setRegiao(rs.getString("regiao"));
+                u = udao.buscar(rs.getInt("usuario"));
+                m.setId(u.getId());
+                m.setCep(u.getCep());
+                m.setCpf(u.getCpf());
+                m.setDataDeNascimento(u.getDataDeNascimento());
+                m.setEnderecoResidencia(u.getEnderecoResidencia());
+                m.setLogin(u.getLogin());
+                m.setNome(u.getNome());
+                m.setSenha(u.getSenha());
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return m;
+    }
+    public LinkedList buscar(String nome){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        UsuarioDAO udao = new UsuarioDAO();
+        LinkedList usuarios = new LinkedList();
+        LinkedList motoristas = new LinkedList();
+        usuarios = udao.buscar(nome);
+        Iterator i = usuarios.iterator();
+        while(i.hasNext()){
+            try {
+                
+                Usuario u = new Usuario();
+                u = (Usuario) i.next();
+                stmt = con.prepareStatement("SELECT * FROM motorista WHERE usuario = ?");
+                stmt.setInt(1, u.getId());
+                rs = stmt.executeQuery();
+                if(rs.next()){
+                    Motorista m = new Motorista();
+                    MotoristaDAO mdao = new MotoristaDAO();
+                    m = mdao.buscar(rs.getInt("id"));
+                    motoristas.add(m);
+                }
+
+            } catch (SQLException ex) {
+                throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+            }finally{
+                ConnectionFactory.closeConnection(con, stmt, rs);
+            }
+        }
+        return motoristas;
     }
 }

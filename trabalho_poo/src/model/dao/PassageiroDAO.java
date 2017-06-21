@@ -6,6 +6,7 @@
 package model.dao;
 
 import codigos.Passageiro;
+import codigos.Usuario;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,11 +46,11 @@ public class PassageiroDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }   
     }
-    public boolean verificaPassageiro(int id_usuario){
+    public int verificaPassageiro(int id_usuario){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        boolean verifica = false;
+        int id = -1;
         
         try {
             stmt = con.prepareStatement("SELECT * FROM passageiro WHERE usuario = ?");
@@ -57,7 +58,7 @@ public class PassageiroDAO {
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                verifica = true;
+                id = rs.getInt("id");
             }
             
         } catch (SQLException ex) {
@@ -65,7 +66,39 @@ public class PassageiroDAO {
         }finally{
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-        return verifica;
+        return id;
+    }
+    public Passageiro buscar(int id){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        UsuarioDAO udao = new UsuarioDAO();
+        Usuario u = new Usuario();
+        Passageiro p = new Passageiro();
+        p.setId_passageiro(-1);
+        try {
+            stmt = con.prepareStatement("SELECT * FROM passageiro WHERE id = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                p.setId_passageiro(rs.getInt("id"));
+                u = udao.buscar(rs.getInt("usuario"));
+                p.setId(u.getId());
+                p.setCep(u.getCep());
+                p.setCpf(u.getCpf());
+                p.setDataDeNascimento(u.getDataDeNascimento());
+                p.setEnderecoResidencia(u.getEnderecoResidencia());
+                p.setLogin(u.getLogin());
+                p.setNome(u.getNome());
+                p.setSenha(u.getSenha());
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return p;
     }
     
 }

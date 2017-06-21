@@ -12,15 +12,17 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
-    public void criar(Usuario u){
+    public int criar(Usuario u){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+        int id = -1;
         try {
-            stmt = con.prepareStatement("INSERT INTO usuario (nome, login, senha, cpf, cep, enderecoResidencia, dataDeNascimento)VALUES(?, ?, ?, ?, ?, ?, ?)");
+            stmt = con.prepareStatement("INSERT INTO usuario (nome, login, senha, cpf, cep, enderecoResidencia, dataDeNascimento)VALUES(?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getLogin());
             stmt.setString(3, u.getSenha());
@@ -28,15 +30,19 @@ public class UsuarioDAO {
             stmt.setString(5, u.getCep());
             stmt.setString(6, u.getEnderecoResidencia());
             stmt.setDate(7, (Date) u.getDataDeNascimento());
-            
-            stmt.executeUpdate();
+            id = stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()){
+                id = rs.getInt(1);
+            }
             JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+            //throw new RuntimeException("Falha ao cadastrar: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
-        
+        return id;
     }
     public LinkedList buscar(){
         Connection con = ConnectionFactory.getConnection();
@@ -70,7 +76,7 @@ public class UsuarioDAO {
         return usuarios;
     }
     
-    /*public LinkedList buscar(String nome){
+    public LinkedList buscar(String nome){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -101,7 +107,7 @@ public class UsuarioDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return usuarios;
-    }*/
+    }
     
     public Usuario buscar(int id){
         Connection con = ConnectionFactory.getConnection();
@@ -137,19 +143,19 @@ public class UsuarioDAO {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET nome = ?, login = ?, senha = ?, cpf = ?, cep = ?, enderecoResidencia = ?, dataDeNascimento = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE usuario SET nome = ?, senha = ?, cpf = ?, cep = ?, enderecoResidencia = ?, dataDeNascimento = ? WHERE id = ?");
             stmt.setString(1, u.getNome());
-            stmt.setString(2, u.getLogin());
-            stmt.setString(3, u.getSenha());
-            stmt.setString(4, u.getCpf());
-            stmt.setString(5, u.getCep());
-            stmt.setString(6, u.getEnderecoResidencia());
-            stmt.setDate(7, (Date) u.getDataDeNascimento());
-            stmt.setInt(8, u.getId());
+            stmt.setString(2, u.getSenha());
+            stmt.setString(3, u.getCpf());
+            stmt.setString(4, u.getCep());
+            stmt.setString(5, u.getEnderecoResidencia());
+            stmt.setDate(6, (Date) u.getDataDeNascimento());
+            stmt.setInt(7, u.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Atualização feita com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar");
+            throw new RuntimeException("Falha ao cadastrar: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -170,7 +176,6 @@ public class UsuarioDAO {
         }
         
     }
-    
     public int verificarSenha(String login, String senha){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

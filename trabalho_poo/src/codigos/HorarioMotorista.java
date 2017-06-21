@@ -10,6 +10,14 @@ public class HorarioMotorista extends Horario{
     public void addPassageiro (Passageiro passageiro) {
         
     }
+
+    public LinkedList getPassageiros() {
+        return passageiros;
+    }
+
+    public void setPassageiros(LinkedList passageiros) {
+        this.passageiros = passageiros;
+    }
     
     public void confirmarPassageiro (Passageiro passageiro) {
         

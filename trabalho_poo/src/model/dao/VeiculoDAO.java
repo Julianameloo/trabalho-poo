@@ -30,6 +30,7 @@ public class VeiculoDAO {
             JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+            throw new RuntimeException("Falha ao cadastrar: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         } 
