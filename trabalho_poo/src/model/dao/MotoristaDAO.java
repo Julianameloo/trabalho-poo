@@ -14,9 +14,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class MotoristaDAO {
+    //criar classe retorno todos motoristas
     public void criar(Motorista m){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -25,10 +28,12 @@ public class MotoristaDAO {
             stmt.setInt(1, m.getId());
             stmt.setString(2, m.getRegiao());
             stmt.executeUpdate();
-           JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
         } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger("Mot_veiDAO").log(Level.SEVERE, ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
             throw new RuntimeException("Falha ao cadastrar: ", ex);
+            
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }

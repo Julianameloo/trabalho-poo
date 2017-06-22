@@ -16,33 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `mot_pass`
+-- Table structure for table `motorista`
 --
 
-DROP TABLE IF EXISTS `mot_pass`;
+DROP TABLE IF EXISTS `motorista`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mot_pass` (
+CREATE TABLE `motorista` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `motorista` int(11) DEFAULT NULL,
-  `passageiro` int(11) DEFAULT NULL,
-  `permanente` tinyint(4) DEFAULT NULL,
+  `usuario` int(11) DEFAULT NULL,
+  `regiao` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `motorista_idx` (`motorista`),
-  KEY `passageiro_idx` (`passageiro`),
-  CONSTRAINT `motorista` FOREIGN KEY (`motorista`) REFERENCES `motorista` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `passageiro` FOREIGN KEY (`passageiro`) REFERENCES `passageiro` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+  KEY `usuario1_idx` (`usuario`),
+  CONSTRAINT `usu` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mot_pass`
+-- Dumping data for table `motorista`
 --
 
-LOCK TABLES `mot_pass` WRITE;
-/*!40000 ALTER TABLE `mot_pass` DISABLE KEYS */;
-INSERT INTO `mot_pass` VALUES (25,44,1,1);
-/*!40000 ALTER TABLE `mot_pass` ENABLE KEYS */;
+LOCK TABLES `motorista` WRITE;
+/*!40000 ALTER TABLE `motorista` DISABLE KEYS */;
+INSERT INTO `motorista` VALUES (37,41,'leste'),(39,42,'leste'),(42,44,'leste'),(44,45,'leste');
+/*!40000 ALTER TABLE `motorista` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-21  2:18:08
+-- Dump completed on 2017-06-22  3:02:46

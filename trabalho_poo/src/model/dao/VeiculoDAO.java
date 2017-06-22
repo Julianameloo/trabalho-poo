@@ -27,13 +27,33 @@ public class VeiculoDAO {
             stmt.setString(2, v.getPlaca());
             stmt.setInt(3, v.getCapacidade());
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
             throw new RuntimeException("Falha ao cadastrar: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         } 
+    }
+    public int buscarPlaca(String placa){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int id = -1;
+        try {
+            stmt = con.prepareStatement("SELECT * FROM veiculo WHERE placa = ?");
+            stmt.setString(1, placa);
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                id = rs.getInt("id");
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return id;
     }
     
     public void atualizar(Veiculo v){

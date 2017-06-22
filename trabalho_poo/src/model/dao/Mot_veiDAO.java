@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Mot_veiDAO {
@@ -26,7 +28,10 @@ public class Mot_veiDAO {
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
         } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger("Mot_veiDAO").log(Level.SEVERE, ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+            throw new RuntimeException("Falha ao cadastrar: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }

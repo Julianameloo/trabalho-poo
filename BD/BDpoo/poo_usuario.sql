@@ -16,33 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `mensagem`
+-- Table structure for table `usuario`
 --
 
-DROP TABLE IF EXISTS `mensagem`;
+DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mensagem` (
-  `id` int(11) NOT NULL,
-  `conteudo` text,
-  `destinatario` int(11) DEFAULT NULL,
-  `remetente` int(11) DEFAULT NULL,
-  `dataHora` datetime DEFAULT NULL,
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(65) DEFAULT NULL,
+  `login` varchar(45) DEFAULT NULL,
+  `senha` varchar(45) DEFAULT NULL,
+  `cpf` varchar(45) DEFAULT NULL,
+  `cep` varchar(45) DEFAULT NULL,
+  `enderecoResidencia` varchar(45) DEFAULT NULL,
+  `dataDeNascimento` date DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `usr1_idx` (`destinatario`),
-  KEY `usr2_idx` (`remetente`),
-  CONSTRAINT `usr1` FOREIGN KEY (`destinatario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `usr2` FOREIGN KEY (`remetente`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `login_UNIQUE` (`login`)
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mensagem`
+-- Dumping data for table `usuario`
 --
 
-LOCK TABLES `mensagem` WRITE;
-/*!40000 ALTER TABLE `mensagem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mensagem` ENABLE KEYS */;
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (40,'eai','aa','12e1da','0','0','ascca ',NULL),(41,'eai','ao','12e1da','0','1','ascca ',NULL),(42,'eai','o','12e1da','0','1','ascca ',NULL),(44,'eai','fds','12e1da','0','1','ascca ',NULL),(45,'eai','fs','12e1da','0','1','ascca ',NULL),(47,'eai ','f','12e1da','0','1','ascca ',NULL),(65,'u','fa','12e1da','0','1','ascca ',NULL);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-21  2:18:16
+-- Dump completed on 2017-06-22  3:02:44

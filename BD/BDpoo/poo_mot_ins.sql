@@ -16,29 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `veiculo`
+-- Table structure for table `mot_ins`
 --
 
-DROP TABLE IF EXISTS `veiculo`;
+DROP TABLE IF EXISTS `mot_ins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `veiculo` (
+CREATE TABLE `mot_ins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `modelo` varchar(45) DEFAULT NULL,
-  `placa` varchar(45) DEFAULT NULL,
-  `capacidade` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+  `motorista` int(11) DEFAULT NULL,
+  `instituicao` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `motor_idx` (`motorista`),
+  KEY `instit_idx` (`instituicao`),
+  CONSTRAINT `instit` FOREIGN KEY (`instituicao`) REFERENCES `instituicao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `motor` FOREIGN KEY (`motorista`) REFERENCES `motorista` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `veiculo`
+-- Dumping data for table `mot_ins`
 --
 
-LOCK TABLES `veiculo` WRITE;
-/*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
-INSERT INTO `veiculo` VALUES (18,'van','sfsvav',10),(19,'van','sfsvav',10),(20,'van','sfsvav',10),(21,'van','sfsvav',10),(22,'van','sfsvav',10),(23,'van','sfsvav',10),(24,'van','sfsvav',10),(25,'van','sfsvav',10),(26,'van','sfsvav',10),(27,'van','sfsvav',10),(28,'van','sfsvav',10),(29,'van','sfsvav',10),(30,'van','sfsvav',10),(31,'van','sfsvav',10),(32,'van','sfsvav',10),(33,'van','sfsvav',10),(34,'van','sfsvav',10),(35,'van','sfsvav',10),(36,'van','sfsvav',10),(37,'van','sfsvav',10),(38,'van','sfsvav',10),(39,'van','sfsvav',10);
-/*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
+LOCK TABLES `mot_ins` WRITE;
+/*!40000 ALTER TABLE `mot_ins` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mot_ins` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-21  2:18:17
+-- Dump completed on 2017-06-22  3:02:44
