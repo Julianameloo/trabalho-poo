@@ -16,31 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `mot_vei`
+-- Table structure for table `pas_ins`
 --
 
-DROP TABLE IF EXISTS `mot_vei`;
+DROP TABLE IF EXISTS `pas_ins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mot_vei` (
+CREATE TABLE `pas_ins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `motorista` int(11) DEFAULT NULL,
-  `veiculo` int(11) DEFAULT NULL,
+  `instituicao` int(11) DEFAULT NULL,
+  `passageiro` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `motorista1_idx` (`motorista`),
-  KEY `veiculo_idx` (`veiculo`),
-  CONSTRAINT `motoris` FOREIGN KEY (`motorista`) REFERENCES `motorista` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `veiculo` FOREIGN KEY (`veiculo`) REFERENCES `veiculo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `pass_idx` (`passageiro`),
+  KEY `inst_idx` (`instituicao`),
+  CONSTRAINT `inst` FOREIGN KEY (`instituicao`) REFERENCES `instituicao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pass` FOREIGN KEY (`passageiro`) REFERENCES `passageiro` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mot_vei`
+-- Dumping data for table `pas_ins`
 --
 
-LOCK TABLES `mot_vei` WRITE;
-/*!40000 ALTER TABLE `mot_vei` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mot_vei` ENABLE KEYS */;
+LOCK TABLES `pas_ins` WRITE;
+/*!40000 ALTER TABLE `pas_ins` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pas_ins` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-21  2:18:17
+-- Dump completed on 2017-06-22  3:02:43

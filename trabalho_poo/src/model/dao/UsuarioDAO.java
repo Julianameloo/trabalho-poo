@@ -8,7 +8,7 @@ package model.dao;
 import codigos.Usuario;
 import connection.ConnectionFactory;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,13 +29,13 @@ public class UsuarioDAO {
             stmt.setString(4, u.getCpf());
             stmt.setString(5, u.getCep());
             stmt.setString(6, u.getEnderecoResidencia());
-            stmt.setDate(7, (Date) u.getDataDeNascimento());
+            java.sql.Date datesql = new java.sql.Date(u.getDataDeNascimento().getTime());
+            stmt.setDate(7, datesql);
             id = stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()){
                 id = rs.getInt(1);
             }
-            JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
             //throw new RuntimeException("Falha ao cadastrar: ", ex);
@@ -139,6 +139,28 @@ public class UsuarioDAO {
         return u;
     }
     
+    public int buscarLogin(String login){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int id = -1;
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE login = ?");
+            stmt.setString(1, login);
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                id = rs.getInt("id");
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return id;
+    }
+    
     public void atualizar(Usuario u){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -149,7 +171,7 @@ public class UsuarioDAO {
             stmt.setString(3, u.getCpf());
             stmt.setString(4, u.getCep());
             stmt.setString(5, u.getEnderecoResidencia());
-            stmt.setDate(6, (Date) u.getDataDeNascimento());
+            stmt.setDate(6, (java.sql.Date) u.getDataDeNascimento());
             stmt.setInt(7, u.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Atualização feita com sucesso!");
