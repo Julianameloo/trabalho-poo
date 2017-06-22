@@ -8,9 +8,12 @@ package views;
 import codigos.Mensagem;
 import codigos.Motorista;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.MensagemDAO;
+import model.dao.Mot_passDAO;
 import model.dao.MotoristaDAO;
 
 /**
@@ -25,6 +28,13 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
      */
     public NovaMensagemMotorista() {
         initComponents();
+        
+        Mot_passDAO mot = new Mot_passDAO();
+        LinkedList ll = mot.passageiros(ID);
+        Iterator i = ll.iterator();
+        while (i.hasNext()) {
+            PassageirosComboBox.addItem(i.next());
+        }
     }
     
     public void recebeID (int id) {
@@ -47,7 +57,7 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
         enviar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         mensagem = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        PassageirosComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -69,8 +79,6 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
         mensagem.setRows(5);
         jScrollPane2.setViewportView(mensagem);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -86,7 +94,7 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel2))
                             .addGap(398, 398, 398)))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PassageirosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -95,7 +103,7 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
                 .addContainerGap(46, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PassageirosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
@@ -175,8 +183,8 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Object> PassageirosComboBox;
     private javax.swing.JButton enviar;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
