@@ -7,7 +7,6 @@ package views;
 
 import codigos.Motorista;
 import codigos.Passageiro;
-import codigos.Usuario;
 import codigos.Veiculo;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
@@ -836,17 +835,18 @@ public class login extends javax.swing.JFrame {
                 PassageiroDAO pdao = new PassageiroDAO();
                 int idp = pdao.verificaPassageiro(id);
                 if(idp == -1) {
-
+                    MotoristaDAO mdao = new MotoristaDAO();
+                    idp = mdao.verificaMotorista(id);
                     telaMotorista tm = new telaMotorista();
                     tm.setVisible(true);
-                    tm.recebeID(id);
+                    tm.recebeID(idp);
                     this.dispose();
                 }
                 else {
 
                     telaPassageiro tp = new telaPassageiro();
                     tp.setVisible(true);
-                    tp.recebeID(id);
+                    tp.recebeID(idp);
                     this.dispose();
                 }
             }
@@ -864,17 +864,18 @@ public class login extends javax.swing.JFrame {
             PassageiroDAO pdao = new PassageiroDAO();
             int idp = pdao.verificaPassageiro(id);
             if(idp == -1) {
-                
+                MotoristaDAO mdao = new MotoristaDAO();
+                idp = mdao.verificaMotorista(id);
                 telaMotorista tm = new telaMotorista();
                 tm.setVisible(true);
-                tm.recebeID(id);
+                tm.recebeID(idp);
                 this.dispose();
             }
             else {
                 
                 telaPassageiro tp = new telaPassageiro();
                 tp.setVisible(true);
-                tp.recebeID(id);
+                tp.recebeID(idp);
                 this.dispose();
             }
         }

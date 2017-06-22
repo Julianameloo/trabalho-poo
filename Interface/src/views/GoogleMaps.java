@@ -21,10 +21,32 @@ public class GoogleMaps extends javax.swing.JFrame {
     
     int zoom = 12;
     String tipo = "roadmap";
+    String rota;
     
     public GoogleMaps() {
         super("Rota");
         initComponents();
+        int rotaChoice;
+        Random gerador = new Random();
+        rotaChoice = gerador.nextInt(5);
+        if (rotaChoice == 0) {
+            rota = "-16.668209,-49.244135|-16.670197,-49.250580|-16.663809,-49.260212";
+        }
+        else if (rotaChoice == 1) {
+            rota = "-16.687414,-49.254100|-16.679057,-49.244316|-16.675366,-49.257954|-16.672156,-49.257877|-16.664699,-49.261119";
+        }
+        else if (rotaChoice == 2) {
+            rota = "-16.687414,-49.254100|-16.668209,-49.244135|-16.675366,-49.257954|-16.663809,-49.260212|-16.672156,-49.257877|-16.664699,-49.261119";
+        }
+        else if (rotaChoice == 3) {
+            rota = "-16.678816,-49.253991|-16.673450,-49.248479|-16.669950,-49.248749|-16.672188,-49.254799|-16.667425,-49.253122";
+        }
+        else if (rotaChoice == 4) {
+            rota = "-16.685702,-49.254679|-16.678041,-49.247731|-16.673077,-49.247012|-16.666277,-49.244166";
+        }
+        else {
+            rota = "-16.683406,-49.257106|-16.674971,-49.248749|-16.672733,-49.246353|-16.669692,-49.249618";
+        }
         atualizaMapa();
         setLocationRelativeTo(null);
     }
@@ -220,14 +242,7 @@ public class GoogleMaps extends javax.swing.JFrame {
         
         String chave="AIzaSyAz2YDYmEQpdEbhPbsDB-Zm6K5dIVXWJhE";
         
-        String rota;
-        int rotaChoice;
-        Random gerador = new Random();
-        rotaChoice = gerador.nextInt(5);
-        if (rotaChoice == 0) {
-            rota = "";
-        }
-        String endereco = "http://maps.googleapis.com/maps/api/staticmap?center=-16.671641,-49.237193&zoom=" + zoom + "&size=640x640&maptype=" + tipo + "&key="+chave+"&sensor=false&format=jpg&path=color:0xff0000ff|weight:5|-16.673378,-49.236957|-16.668209,-49.244135|-16.670197,-49.250580|-16.663809,-49.260212|-16.601657,-49.258911";
+        String endereco = "http://maps.googleapis.com/maps/api/staticmap?center=-16.671641,-49.237193&zoom=" + zoom + "&size=640x640&maptype=" + tipo + "&key="+chave+"&sensor=false&format=jpg&path=color:0xff0000ff|weight:5|-16.673378,-49.236957|"+rota+"|-16.601657,-49.258911";
         BufferedImage img = null;
 
         try {

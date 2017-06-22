@@ -55,7 +55,7 @@ public class telaPassageiro extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         info = new javax.swing.JTextArea();
-        BuscarMotoristaID = new javax.swing.JScrollPane();
+        BuscarMotoristaNome = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -63,14 +63,6 @@ public class telaPassageiro extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        BuscarMotoristaRegiao = new javax.swing.JScrollPane();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        botaoBuscarRegiaoM = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         SolicitarHorario = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -90,7 +82,6 @@ public class telaPassageiro extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -245,6 +236,7 @@ public class telaPassageiro extends javax.swing.JFrame {
 
         info.setEditable(false);
         info.setColumns(20);
+        info.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         info.setRows(5);
         jScrollPane1.setViewportView(info);
 
@@ -253,11 +245,11 @@ public class telaPassageiro extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,8 +257,8 @@ public class telaPassageiro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         Informações.setViewportView(jPanel3);
@@ -275,7 +267,7 @@ public class telaPassageiro extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(245, 248, 249));
 
-        jLabel8.setText("ID do motorista");
+        jLabel8.setText("Nome do motorista");
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,58 +316,9 @@ public class telaPassageiro extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        BuscarMotoristaID.setViewportView(jPanel4);
+        BuscarMotoristaNome.setViewportView(jPanel4);
 
-        Tela2.add(BuscarMotoristaID, "buscarnome");
-
-        jPanel8.setBackground(new java.awt.Color(245, 248, 249));
-
-        jLabel6.setText("Região");
-
-        jLabel7.setText("Resultados da busca");
-
-        botaoBuscarRegiaoM.setText("Buscar");
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane4.setViewportView(jTextArea1);
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botaoBuscarRegiaoM)))
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoBuscarRegiaoM))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
-        BuscarMotoristaRegiao.setViewportView(jPanel8);
-
-        Tela2.add(BuscarMotoristaRegiao, "buscaregiao");
+        Tela2.add(BuscarMotoristaNome, "buscarnome");
 
         jPanel6.setBackground(new java.awt.Color(245, 248, 249));
 
@@ -508,21 +451,13 @@ public class telaPassageiro extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem3.setText("Buscar por ID");
+        jMenuItem3.setText("Buscar por nome");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem3);
-
-        jMenuItem9.setText("Buscar por região");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem9);
 
         jMenuBar1.add(jMenu2);
 
@@ -574,14 +509,12 @@ public class telaPassageiro extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here
-        
         String informacoes;
         Passageiro p;
         PassageiroDAO pdao = new PassageiroDAO();
         p = pdao.buscar(passageiroID);
-        informacoes = "Nome: "+p.getNome()+"\nData de Nascimento" +""+ "\nCpf: "+p.getCpf()+ 
-                "\nEndereço: " +p.getEnderecoResidencia()+"\nCep: "+p.getCep();
+        informacoes = "\nNome: "+p.getNome()+"\n\nData de Nascimento" +""+ "\n\nCpf: "+p.getCpf()+ 
+                "\n\nEndereço: " +p.getEnderecoResidencia()+"\n\nCep: "+p.getCep();
         info.setText(informacoes);
         CardLayout cl = (CardLayout) Tela2.getLayout();
         cl.show(Tela2, "inf");
@@ -630,13 +563,6 @@ public class telaPassageiro extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) Tela2.getLayout();
         cl.show(Tela2, "buscarnome");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
-        
-        CardLayout cl = (CardLayout) Tela2.getLayout();
-        cl.show(Tela2, "buscaregiao");
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -690,8 +616,7 @@ public class telaPassageiro extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane BuscarMotoristaID;
-    private javax.swing.JScrollPane BuscarMotoristaRegiao;
+    private javax.swing.JScrollPane BuscarMotoristaNome;
     private javax.swing.JScrollPane Informações;
     private javax.swing.JScrollPane MensagensEnviadas;
     private javax.swing.JScrollPane MensagensRecebidas;
@@ -699,7 +624,6 @@ public class telaPassageiro extends javax.swing.JFrame {
     private javax.swing.JScrollPane SolicitarHorario;
     private javax.swing.JPanel Tela2;
     private javax.swing.JScrollPane TelaInicio;
-    private javax.swing.JButton botaoBuscarRegiaoM;
     private javax.swing.JTable enviadas;
     private javax.swing.JTextArea info;
     private javax.swing.JButton jButton1;
@@ -713,8 +637,6 @@ public class telaPassageiro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -730,7 +652,6 @@ public class telaPassageiro extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -738,18 +659,14 @@ public class telaPassageiro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
