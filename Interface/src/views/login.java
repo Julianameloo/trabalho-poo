@@ -302,6 +302,12 @@ public class login extends javax.swing.JFrame {
 
         jLabel36.setText("Senha");
 
+        senhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhapKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -637,6 +643,12 @@ public class login extends javax.swing.JFrame {
 
         jLabel29.setText("Senha");
 
+        senham.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhamKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -701,7 +713,7 @@ public class login extends javax.swing.JFrame {
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                 .addComponent(Confirmar3)
                 .addContainerGap())
         );
@@ -814,6 +826,7 @@ public class login extends javax.swing.JFrame {
             p.setId(id);
             PassageiroDAO pdao = new PassageiroDAO();
             pdao.criar(p);
+            dispose();
         }
     }//GEN-LAST:event_Confirmar2ActionPerformed
 
@@ -921,8 +934,91 @@ public class login extends javax.swing.JFrame {
             m.setId_motorista(idm);
             Mot_veiDAO mvdao = new Mot_veiDAO();
             mvdao.criar(m, v);
+            dispose();
         }
     }//GEN-LAST:event_Confirmar3ActionPerformed
+
+    private void senhamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhamKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String loginCadastro = loginp.getText();
+            UsuarioDAO udao = new UsuarioDAO();
+            Motorista m = new Motorista(); 
+            int l = udao.buscarLogin(loginCadastro);
+            if(l != -1){
+                JOptionPane.showMessageDialog(null, "Login já existe!");
+            }
+            else {
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date date = formatter.parse(datam.getText());
+                    m.setDataDeNascimento(date);
+                } catch (ParseException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }  
+                m.setNome(nomem.getText());
+                m.setCpf(cpfm.getText());
+                m.setEnderecoResidencia(endm.getText());
+                m.setCep(cepm.getText());
+                m.setLogin(loginm.getText());
+                m.setSenha(senham.getText());
+                m.setRegiao(regiaom.getText());
+                Veiculo v = new Veiculo();
+                VeiculoDAO vdao = new VeiculoDAO();
+                v.setCapacidade(Integer.parseInt(capm.getText()));
+                v.setModelo(modelom.getText());
+                v.setPlaca(placam.getText());
+                vdao.criar(v);
+                int idv = vdao.buscarPlaca(v.getPlaca());
+                int id = udao.criar(m);
+                m.setId(id);
+                v.setId(idv);
+                MotoristaDAO mdao = new MotoristaDAO();
+                mdao.criar(m);
+                int idm = mdao.verificaMotorista(id);
+                m.setId_motorista(idm);
+                Mot_veiDAO mvdao = new Mot_veiDAO();
+                mvdao.criar(m, v);
+                dispose();
+            }
+        }
+    }//GEN-LAST:event_senhamKeyPressed
+
+    private void senhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhapKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String loginCadastro = loginp.getText();
+        UsuarioDAO udao = new UsuarioDAO();
+        int l = udao.buscarLogin(loginCadastro);
+        if(l != -1){
+            JOptionPane.showMessageDialog(null, "Login já existe!");
+        }
+        else {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Passageiro p = new Passageiro();   
+            //pegar campos
+            p.setNome(nomep.getText());
+            try {
+                Date date = formatter.parse(datap.getText());
+                p.setDataDeNascimento(date);
+            } catch (ParseException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            p.setCpf(cpfp.getText());
+            p.setEnderecoResidencia(endp.getText());
+            p.setCep(cepp.getText());
+            p.setLogin(loginp.getText());
+            p.setSenha(senhap.getText());
+            int id = udao.criar(p);
+            p.setId(id);
+            PassageiroDAO pdao = new PassageiroDAO();
+            pdao.criar(p);
+            dispose();
+        }
+            
+        }
+    }//GEN-LAST:event_senhapKeyPressed
 
     /**
      * @param args the command line arguments

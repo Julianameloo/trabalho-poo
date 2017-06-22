@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import views.login;
 
 public class Mot_veiDAO {
     public void criar(Motorista m, Veiculo v){
@@ -27,6 +28,7 @@ public class Mot_veiDAO {
             stmt.setInt(2, v.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
+            new login().setVisible(true);
         } catch (SQLException ex) {
             ex.printStackTrace();
             Logger.getLogger("Mot_veiDAO").log(Level.SEVERE, ex.getMessage());

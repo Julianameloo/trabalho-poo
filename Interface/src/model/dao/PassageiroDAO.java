@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import views.login;
 
 public class PassageiroDAO {
     public void criar(Passageiro p){
@@ -24,6 +25,7 @@ public class PassageiroDAO {
             stmt.setInt(1, p.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
+            new login().setVisible(true);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
         } finally{

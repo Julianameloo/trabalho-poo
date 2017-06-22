@@ -684,8 +684,8 @@ public class telaMotorista extends javax.swing.JFrame {
 
     private void NovaMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovaMensagemActionPerformed
         // TODO add your handling code here:
-        new NovaMensagemMotorista().setVisible(true);
         NovaMensagemMotorista nvm = new NovaMensagemMotorista();
+        nvm.setVisible(true);
         nvm.recebeID(motoristaID);
     }//GEN-LAST:event_NovaMensagemActionPerformed
 

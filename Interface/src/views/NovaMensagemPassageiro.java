@@ -8,12 +8,17 @@ package views;
 import codigos.Mensagem;
 import codigos.Motorista;
 import codigos.Passageiro;
+import codigos.Usuario;
+import java.awt.event.KeyEvent;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.MensagemDAO;
 import model.dao.MotoristaDAO;
 import model.dao.PassageiroDAO;
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -49,7 +54,11 @@ public class NovaMensagemPassageiro extends javax.swing.JFrame {
         enviar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         mensagem = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        MotoristasComboBox = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        nomeBusca = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -71,7 +80,23 @@ public class NovaMensagemPassageiro extends javax.swing.JFrame {
         mensagem.setRows(5);
         jScrollPane2.setViewportView(mensagem);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel3.setText("Nome");
+
+        nomeBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nomeBuscaKeyPressed(evt);
+            }
+        });
+
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
+        jLabel4.setText("Escolha dentre as opções de login");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,24 +108,41 @@ public class NovaMensagemPassageiro extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(enviar)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(nomeBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(MotoristasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGap(273, 273, 273)))))
+                                    .addComponent(jLabel4)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(enviar)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(406, 406, 406))))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MotoristasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomeBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,18 +170,70 @@ public class NovaMensagemPassageiro extends javax.swing.JFrame {
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         Mensagem m = new Mensagem();
-        Passageiro p = new Passageiro();
+        Passageiro p;
         PassageiroDAO pdao = new PassageiroDAO();
-        //p = pdao.buscar(id_passageiro);//pegar tela login
+        p = pdao.buscar(ID);
         //pegar objeto motorista
         m.setDataHora(new Date(System.currentTimeMillis()));
         m.setConteudo(mensagem.getText());
-        //m.setDestinatario();
+        m.setDestinatario((Motorista)MotoristasComboBox.getSelectedItem());
         m.setRemetente(p);
         MensagemDAO mendao = new MensagemDAO();
         mendao.criar(m);
-       
     }//GEN-LAST:event_enviarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        MotoristasComboBox.removeAllItems();
+        UsuarioDAO udao = new UsuarioDAO();
+        LinkedList ll = udao.buscar(nomeBusca.getText());
+        Iterator i = ll.iterator();
+        if (!ll.isEmpty()) {
+            MotoristaDAO p = new MotoristaDAO();
+            Usuario u;
+            while (i.hasNext()) {
+                u = (Usuario) i.next();
+                if (p.verificaMotorista(u.getId()) != -1) {
+                    MotoristaDAO mdao = new MotoristaDAO();
+                    Motorista m;
+                    int id = mdao.verificaMotorista(u.getId());
+                    m = mdao.buscar(id);
+                    MotoristasComboBox.addItem(m);
+                }
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Passageiro não encontrado!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void nomeBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomeBuscaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            MotoristasComboBox.removeAllItems();
+            UsuarioDAO udao = new UsuarioDAO();
+            LinkedList ll = udao.buscar(nomeBusca.getText());
+            Iterator i = ll.iterator();
+            if (!ll.isEmpty()) {
+                MotoristaDAO p = new MotoristaDAO();
+                Usuario u;
+                while (i.hasNext()) {
+                    u = (Usuario) i.next();
+                    if (p.verificaMotorista(u.getId()) != -1) {
+                        MotoristaDAO mdao = new MotoristaDAO();
+                        Motorista m;
+                        int id = mdao.verificaMotorista(u.getId());
+                        m = mdao.buscar(id);
+                        MotoristasComboBox.addItem(m);
+                    }
+                }
+            }
+        
+            else {
+                JOptionPane.showMessageDialog(null, "Passageiro não encontrado!");
+            }
+        }
+    }//GEN-LAST:event_nomeBuscaKeyPressed
    
     /**
      * @param args the command line arguments
@@ -178,13 +272,17 @@ public class NovaMensagemPassageiro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Object> MotoristasComboBox;
     private javax.swing.JButton enviar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea mensagem;
+    private javax.swing.JTextField nomeBusca;
     // End of variables declaration//GEN-END:variables
 }

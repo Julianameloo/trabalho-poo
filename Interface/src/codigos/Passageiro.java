@@ -36,4 +36,6 @@ public class Passageiro extends Usuario{
     public void solicitarHorario (Horario horario, Motorista motorista) {
         
     }
+    
+    
 }

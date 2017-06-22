@@ -25,9 +25,9 @@ public class MensagemDAO {
             stmt.setInt(2, m.getDestinatario().getId());
             stmt.setInt(3, m.getRemetente().getId());
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
+            JOptionPane.showMessageDialog(null, "Mensagem enviada com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+            JOptionPane.showMessageDialog(null, "Erro ao enviar mensagem");
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         } 

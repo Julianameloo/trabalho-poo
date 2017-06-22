@@ -5,16 +5,22 @@
  */
 package views;
 
+
+
 import codigos.Mensagem;
 import codigos.Motorista;
+import codigos.Passageiro;
+import codigos.Usuario;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.MensagemDAO;
-import model.dao.Mot_passDAO;
 import model.dao.MotoristaDAO;
+import model.dao.PassageiroDAO;
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -22,23 +28,13 @@ import model.dao.MotoristaDAO;
  */
 public class NovaMensagemMotorista extends javax.swing.JFrame {
     telaPassageiro tp;
-    int ID;
+    int motoristaID;
+    
     /**
      * Creates new form NovaMensagem
      */
     public NovaMensagemMotorista() {
         initComponents();
-        
-        Mot_passDAO mot = new Mot_passDAO();
-        LinkedList ll = mot.passageiros(ID);
-        Iterator i = ll.iterator();
-        while (i.hasNext()) {
-            PassageirosComboBox.addItem(i.next());
-        }
-    }
-    
-    public void recebeID (int id) {
-        this.ID = id;
     }
 
     /**
@@ -58,6 +54,10 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         mensagem = new javax.swing.JTextArea();
         PassageirosComboBox = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        buscaNome = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -79,32 +79,67 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
         mensagem.setRows(5);
         jScrollPane2.setViewportView(mensagem);
 
+        jLabel3.setText("Nome");
+
+        buscaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscaNomeKeyPressed(evt);
+            }
+        });
+
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
+        jLabel4.setText("Escolha dentre as opções de login");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(47, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane2)
-                        .addComponent(enviar)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2))
-                            .addGap(398, 398, 398)))
-                    .addComponent(PassageirosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(enviar)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(buscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(197, 197, 197)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(PassageirosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(PassageirosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PassageirosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addGap(1, 1, 1)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,17 +167,71 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         Mensagem m = new Mensagem();
-        Motorista mot = new Motorista();
+        Motorista mot;
         MotoristaDAO mdao = new MotoristaDAO();
-        //mot = mdao.buscar(id_motorista);
-        //pegar objeto passageiro
+        mot = mdao.buscar(motoristaID);
         m.setDataHora(new Date(System.currentTimeMillis()));
         m.setConteudo(mensagem.getText());
-        //m.setDestinatario();
+        m.setDestinatario((Passageiro)PassageirosComboBox.getSelectedItem());
         m.setRemetente(mot);
         MensagemDAO mendao = new MensagemDAO();
         mendao.criar(m);
     }//GEN-LAST:event_enviarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            PassageirosComboBox.removeAllItems();
+            UsuarioDAO udao = new UsuarioDAO();
+            LinkedList ll = udao.buscar(buscaNome.getText());
+            Iterator i = ll.iterator();
+            if (!ll.isEmpty()) {
+                PassageiroDAO p = new PassageiroDAO();
+                Usuario u;
+                while (i.hasNext()) {
+                    u = (Usuario) i.next();
+                    if (p.verificaPassageiro(u.getId()) != -1) {
+                        PassageiroDAO pdao = new PassageiroDAO();
+                        Passageiro pa;
+                        int id = pdao.verificaPassageiro(u.getId());
+                        pa = pdao.buscar(id);
+                        PassageirosComboBox.addItem(pa);
+                    }
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Passageiro não encontrado!");
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+     public void recebeID (int id) {
+        this.motoristaID = id;
+    }
+    
+    private void buscaNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaNomeKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            PassageirosComboBox.removeAllItems();
+            UsuarioDAO udao = new UsuarioDAO();
+            LinkedList ll = udao.buscar(buscaNome.getText());
+            Iterator i = ll.iterator();
+            if (!ll.isEmpty()) {
+                PassageiroDAO p = new PassageiroDAO();
+                Usuario u;
+                while (i.hasNext()) {
+                    u = (Usuario) i.next();
+                    if (p.verificaPassageiro(u.getId()) != -1) {
+                        PassageiroDAO pdao = new PassageiroDAO();
+                        Passageiro pa;
+                        int id = pdao.verificaPassageiro(u.getId());
+                        pa = pdao.buscar(id);
+                        PassageirosComboBox.addItem(pa);
+                    }
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Passageiro não encontrado!");
+            }
+        }
+    }//GEN-LAST:event_buscaNomeKeyPressed
    
     /**
      * @param args the command line arguments
@@ -184,9 +273,13 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Object> PassageirosComboBox;
+    private javax.swing.JTextField buscaNome;
     private javax.swing.JButton enviar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

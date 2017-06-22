@@ -466,6 +466,9 @@
                     <Component class="javax.swing.JTextField" name="loginp">
                     </Component>
                     <Component class="javax.swing.JPasswordField" name="senhap">
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="senhapKeyPressed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -596,7 +599,7 @@
                           <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="36" max="32767" attributes="0"/>
+                          <EmptySpace pref="163" max="32767" attributes="0"/>
                           <Component id="Confirmar3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1016,6 +1019,9 @@
                     <Component class="javax.swing.JTextField" name="loginm">
                     </Component>
                     <Component class="javax.swing.JPasswordField" name="senham">
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="senhamKeyPressed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
