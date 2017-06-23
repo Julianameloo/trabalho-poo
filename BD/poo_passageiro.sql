@@ -16,33 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `mensagem`
+-- Table structure for table `passageiro`
 --
 
-DROP TABLE IF EXISTS `mensagem`;
+DROP TABLE IF EXISTS `passageiro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mensagem` (
-  `id` int(11) NOT NULL,
-  `conteudo` text,
-  `destinatario` int(11) DEFAULT NULL,
-  `remetente` int(11) DEFAULT NULL,
-  `dataHora` datetime DEFAULT NULL,
+CREATE TABLE `passageiro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `usr1_idx` (`destinatario`),
-  KEY `usr2_idx` (`remetente`),
-  CONSTRAINT `usr1` FOREIGN KEY (`destinatario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `usr2` FOREIGN KEY (`remetente`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `usuario_UNIQUE` (`usuario`),
+  KEY `usuario_idx` (`usuario`),
+  CONSTRAINT `usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mensagem`
+-- Dumping data for table `passageiro`
 --
 
-LOCK TABLES `mensagem` WRITE;
-/*!40000 ALTER TABLE `mensagem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mensagem` ENABLE KEYS */;
+LOCK TABLES `passageiro` WRITE;
+/*!40000 ALTER TABLE `passageiro` DISABLE KEYS */;
+INSERT INTO `passageiro` VALUES (1,47),(17,65);
+/*!40000 ALTER TABLE `passageiro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-22  3:02:45
+-- Dump completed on 2017-06-23  1:39:12

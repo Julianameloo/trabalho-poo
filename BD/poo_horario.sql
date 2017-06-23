@@ -16,34 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuario`
+-- Table structure for table `horario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
+DROP TABLE IF EXISTS `horario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuario` (
+CREATE TABLE `horario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(65) DEFAULT NULL,
-  `login` varchar(45) DEFAULT NULL,
-  `senha` varchar(45) DEFAULT NULL,
-  `cpf` varchar(45) DEFAULT NULL,
-  `cep` varchar(45) DEFAULT NULL,
-  `enderecoResidencia` varchar(45) DEFAULT NULL,
-  `dataDeNascimento` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+  `tipo` tinyint(4) DEFAULT NULL,
+  `horaInicio` time DEFAULT NULL,
+  `horaFinal` time DEFAULT NULL,
+  `dia` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuario`
+-- Dumping data for table `horario`
 --
 
-LOCK TABLES `usuario` WRITE;
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (40,'eai','aa','12e1da','0','0','ascca ',NULL),(41,'eai','ao','12e1da','0','1','ascca ',NULL),(42,'eai','o','12e1da','0','1','ascca ',NULL),(44,'eai','fds','12e1da','0','1','ascca ',NULL),(45,'eai','fs','12e1da','0','1','ascca ',NULL),(47,'eai ','f','12e1da','0','1','ascca ',NULL),(65,'u','fa','12e1da','0','1','ascca ',NULL);
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+LOCK TABLES `horario` WRITE;
+/*!40000 ALTER TABLE `horario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `horario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-22  3:02:44
+-- Dump completed on 2017-06-23  1:39:13

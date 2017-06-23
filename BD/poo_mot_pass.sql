@@ -16,31 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `pas_ins`
+-- Table structure for table `mot_pass`
 --
 
-DROP TABLE IF EXISTS `pas_ins`;
+DROP TABLE IF EXISTS `mot_pass`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pas_ins` (
+CREATE TABLE `mot_pass` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `instituicao` int(11) DEFAULT NULL,
+  `motorista` int(11) DEFAULT NULL,
   `passageiro` int(11) DEFAULT NULL,
+  `permanente` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `pass_idx` (`passageiro`),
-  KEY `inst_idx` (`instituicao`),
-  CONSTRAINT `inst` FOREIGN KEY (`instituicao`) REFERENCES `instituicao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `pass` FOREIGN KEY (`passageiro`) REFERENCES `passageiro` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `motorista_idx` (`motorista`),
+  KEY `passageiro_idx` (`passageiro`),
+  CONSTRAINT `motorista` FOREIGN KEY (`motorista`) REFERENCES `motorista` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `passageiro` FOREIGN KEY (`passageiro`) REFERENCES `passageiro` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pas_ins`
+-- Dumping data for table `mot_pass`
 --
 
-LOCK TABLES `pas_ins` WRITE;
-/*!40000 ALTER TABLE `pas_ins` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pas_ins` ENABLE KEYS */;
+LOCK TABLES `mot_pass` WRITE;
+/*!40000 ALTER TABLE `mot_pass` DISABLE KEYS */;
+INSERT INTO `mot_pass` VALUES (25,44,1,1);
+/*!40000 ALTER TABLE `mot_pass` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-22  3:02:43
+-- Dump completed on 2017-06-23  1:39:12
