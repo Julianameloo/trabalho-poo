@@ -205,6 +205,7 @@ public class NovaMensagemMotorista extends javax.swing.JFrame {
      public void recebeID (int id) {
         this.motoristaID = id;
     }
+     
     
     private void buscaNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaNomeKeyPressed
         // TODO add your handling code here:

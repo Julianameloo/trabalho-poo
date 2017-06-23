@@ -5,11 +5,26 @@
  */
 package views;
 
+import codigos.Horario;
+import codigos.Mensagem;
+import codigos.Motorista;
 import codigos.Passageiro;
+import codigos.Usuario;
 import java.awt.CardLayout;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.util.Iterator;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JViewport;
 import javax.swing.table.DefaultTableModel;
+import model.dao.Hor_passDAO;
+import model.dao.MensagemDAO;
+import model.dao.MotoristaDAO;
 import model.dao.PassageiroDAO;
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -37,17 +52,17 @@ public class telaPassageiro extends javax.swing.JFrame {
         Tela2 = new javax.swing.JPanel();
         TelaInicio = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        bemVindoLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         MensagensRecebidas = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelaRecebidas = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         MensagensEnviadas = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        enviadas = new javax.swing.JTable();
+        tabelaEnviadas = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         Informações = new javax.swing.JScrollPane();
@@ -58,9 +73,9 @@ public class telaPassageiro extends javax.swing.JFrame {
         BuscarMotoristaNome = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        buscaNomeMotorista = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        resultadoBuscaMotorista = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         SolicitarHorario = new javax.swing.JScrollPane();
@@ -68,11 +83,13 @@ public class telaPassageiro extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jButton3 = new javax.swing.JButton();
+        selecionarDia = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
         MostrarHorarios = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaHorarios = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -95,8 +112,7 @@ public class telaPassageiro extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(245, 248, 249));
 
-        jLabel3.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        jLabel3.setText("Bem vindo(a) passageiro,");
+        bemVindoLabel.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
 
         jLabel1.setText("Selecione as opções acima para navegar no aplicativo");
 
@@ -108,14 +124,14 @@ public class telaPassageiro extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3))
+                    .addComponent(bemVindoLabel))
                 .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(51, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bemVindoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap(183, Short.MAX_VALUE))
@@ -127,7 +143,7 @@ public class telaPassageiro extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(245, 248, 249));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaRecebidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -135,14 +151,14 @@ public class telaPassageiro extends javax.swing.JFrame {
                 "Remetente", "Horário", "Mensagem"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setMinWidth(150);
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable2.getColumnModel().getColumn(0).setMaxWidth(150);
-            jTable2.getColumnModel().getColumn(1).setMinWidth(80);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(80);
-            jTable2.getColumnModel().getColumn(1).setMaxWidth(80);
+        jScrollPane3.setViewportView(tabelaRecebidas);
+        if (tabelaRecebidas.getColumnModel().getColumnCount() > 0) {
+            tabelaRecebidas.getColumnModel().getColumn(0).setMinWidth(180);
+            tabelaRecebidas.getColumnModel().getColumn(0).setPreferredWidth(180);
+            tabelaRecebidas.getColumnModel().getColumn(0).setMaxWidth(180);
+            tabelaRecebidas.getColumnModel().getColumn(1).setMinWidth(80);
+            tabelaRecebidas.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tabelaRecebidas.getColumnModel().getColumn(1).setMaxWidth(80);
         }
 
         jLabel4.setText("Recebidas");
@@ -156,16 +172,16 @@ public class telaPassageiro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 110, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(59, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         MensagensRecebidas.setViewportView(jPanel2);
@@ -174,7 +190,7 @@ public class telaPassageiro extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(245, 248, 249));
 
-        enviadas.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaEnviadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -182,14 +198,14 @@ public class telaPassageiro extends javax.swing.JFrame {
                 "Destinatário", "Horário", "Mensagem"
             }
         ));
-        jScrollPane2.setViewportView(enviadas);
-        if (enviadas.getColumnModel().getColumnCount() > 0) {
-            enviadas.getColumnModel().getColumn(0).setMinWidth(150);
-            enviadas.getColumnModel().getColumn(0).setPreferredWidth(150);
-            enviadas.getColumnModel().getColumn(0).setMaxWidth(150);
-            enviadas.getColumnModel().getColumn(1).setMinWidth(80);
-            enviadas.getColumnModel().getColumn(1).setPreferredWidth(80);
-            enviadas.getColumnModel().getColumn(1).setMaxWidth(80);
+        jScrollPane2.setViewportView(tabelaEnviadas);
+        if (tabelaEnviadas.getColumnModel().getColumnCount() > 0) {
+            tabelaEnviadas.getColumnModel().getColumn(0).setMinWidth(150);
+            tabelaEnviadas.getColumnModel().getColumn(0).setPreferredWidth(150);
+            tabelaEnviadas.getColumnModel().getColumn(0).setMaxWidth(150);
+            tabelaEnviadas.getColumnModel().getColumn(1).setMinWidth(80);
+            tabelaEnviadas.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tabelaEnviadas.getColumnModel().getColumn(1).setMaxWidth(80);
         }
 
         jLabel5.setText("Enviadas");
@@ -269,18 +285,28 @@ public class telaPassageiro extends javax.swing.JFrame {
 
         jLabel8.setText("Nome do motorista");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        buscaNomeMotorista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                buscaNomeMotoristaActionPerformed(evt);
+            }
+        });
+        buscaNomeMotorista.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscaNomeMotoristaKeyPressed(evt);
             }
         });
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane5.setViewportView(jTextArea2);
+        resultadoBuscaMotorista.setEditable(false);
+        resultadoBuscaMotorista.setColumns(20);
+        resultadoBuscaMotorista.setRows(5);
+        jScrollPane5.setViewportView(resultadoBuscaMotorista);
 
         jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Resultados da busca");
 
@@ -295,7 +321,7 @@ public class telaPassageiro extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buscaNomeMotorista, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)))
                 .addContainerGap(48, Short.MAX_VALUE))
@@ -307,7 +333,7 @@ public class telaPassageiro extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscaNomeMotorista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
@@ -332,30 +358,40 @@ public class telaPassageiro extends javax.swing.JFrame {
 
         jButton3.setText("Solicitar");
 
+        selecionarDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" }));
+
+        jLabel6.setText("Selecione o dia");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(selecionarDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(138, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                .addContainerGap(91, Short.MAX_VALUE)
+                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(selecionarDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel10)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         SolicitarHorario.setViewportView(jPanel6);
@@ -366,32 +402,32 @@ public class telaPassageiro extends javax.swing.JFrame {
 
         jLabel11.setText("Horários atuais");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Horários"
+                "Início", "Fim"
             }
         ));
-        jScrollPane6.setViewportView(jTable1);
+        jScrollPane6.setViewportView(tabelaHorarios);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
+                .addGap(93, 93, 93)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(148, 148, 148)
                 .addComponent(jLabel11)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -504,6 +540,28 @@ public class telaPassageiro extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         
+        MensagemDAO mdao = new MensagemDAO();
+        PassageiroDAO pas = new PassageiroDAO();
+        Usuario u;
+        u = pas.buscar(passageiroID);
+        LinkedList ll = mdao.msgRecebidas(u);
+        Iterator i = ll.iterator();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaRecebidas.getModel();
+        modelo.setNumRows(0);
+        Mensagem m;
+        int indexRow = 0;
+        while (i.hasNext()) {
+            indexRow++;
+            m = (Mensagem)i.next();
+            modelo.addRow(new Object[] {
+                m.getRemetente().getNome()+"("+m.getRemetente().getLogin()+")",
+                m.getDataHora(),
+                formatTxtForShowInTable(m.getConteudo())
+            });
+            tabelaRecebidas.setRowHeight(100);
+            scrollCellToView(indexRow, 3);
+        }
+        
         CardLayout cl = (CardLayout) Tela2.getLayout();
         cl.show(Tela2, "mensr");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -535,6 +593,16 @@ public class telaPassageiro extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        Hor_passDAO hdao = new Hor_passDAO();
+        LinkedList ll = hdao.mostrarHorarioPassageiro(passageiroID);
+        Iterator i = ll.iterator();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaHorarios.getModel();
+        while (i.hasNext()) {
+            Horario h;
+            h = (Horario)i.next();
+            modelo.addRow(new Object[] {h.getHoraInicio(),
+                                        h.getHoraFinal()});
+        }
         CardLayout cl = (CardLayout) Tela2.getLayout();
         cl.show(Tela2, "mostrah");
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -554,25 +622,130 @@ public class telaPassageiro extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
+        MensagemDAO mdao = new MensagemDAO();
+        PassageiroDAO mot = new PassageiroDAO();
+        Usuario u;
+        u = mot.buscar(passageiroID);
+        LinkedList ll = mdao.msgEnviadas(u);
+        Iterator i = ll.iterator();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaEnviadas.getModel();
+        modelo.setNumRows(0);
+        Mensagem m;
+        while (i.hasNext()) {
+            m = (Mensagem)i.next();
+            modelo.addRow(new Object[] {
+                m.getDestinatario().getNome()+"("+m.getDestinatario().getLogin()+")",
+                m.getDataHora(),
+                formatTxtForShowInTable(m.getConteudo())
+            });
+            tabelaEnviadas.setRowHeight(100);
+        }
+        
         CardLayout cl = (CardLayout) Tela2.getLayout();
         cl.show(Tela2, "mense");
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    public void scrollCellToView(int rowIndex, int vColIndex) {
+    if (!(this.getParent() instanceof JViewport)) {
+        return;
+    }
+    JViewport viewport = (JViewport) this.getParent();
+    Rectangle rect = tabelaRecebidas.getCellRect(rowIndex, vColIndex, true);
+    Rectangle viewRect = viewport.getViewRect();
+
+    int x = viewRect.x;
+    int y = viewRect.y;
+
+    if (rect.x >= viewRect.x && rect.x <= (viewRect.x + viewRect.width - rect.width)){
+
+    } else if (rect.x < viewRect.x){
+        x = rect.x;
+    } else if (rect.x > (viewRect.x + viewRect.width - rect.width)) {
+        x = rect.x - viewRect.width + rect.width;
+    }
+
+    if (rect.y >= viewRect.y && rect.y <= (viewRect.y + viewRect.height - rect.height)){
+
+    } else if (rect.y < viewRect.y){
+        y = rect.y;
+    } else if (rect.y > (viewRect.y + viewRect.height - rect.height)){
+        y = rect.y - viewRect.height + rect.height;
+    }
+
+    viewport.setViewPosition(new Point(x,y));
+}
+    
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         CardLayout cl = (CardLayout) Tela2.getLayout();
         cl.show(Tela2, "buscarnome");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void buscaNomeMotoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaNomeMotoristaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_buscaNomeMotoristaActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
         new login().setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        UsuarioDAO udao = new UsuarioDAO();
+        LinkedList ll = udao.buscar(buscaNomeMotorista.getText());
+        Iterator i = ll.iterator();
+        if (!ll.isEmpty()) {
+            MotoristaDAO p = new MotoristaDAO();
+            Usuario u;
+            String text = "\n";
+            while (i.hasNext()) {
+                u = (Usuario) i.next();
+                if (p.verificaMotorista(u.getId()) != -1) {
+                    MotoristaDAO mdao = new MotoristaDAO();
+                    Motorista m;
+                    int id = mdao.verificaMotorista(u.getId());
+                    m = mdao.buscar(id);
+                    text = text+"Login: "+ m.getLogin()+"\nRegião: "+m.getRegiao()+"\n";
+                }
+            }
+            resultadoBuscaMotorista.setText(text);
+            if (text.equals("\n")) {
+                JOptionPane.showMessageDialog(null, "Motorista não encontrado!");
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void buscaNomeMotoristaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaNomeMotoristaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            UsuarioDAO udao = new UsuarioDAO();
+            LinkedList ll = udao.buscar(buscaNomeMotorista.getText());
+            Iterator i = ll.iterator();
+            if (!ll.isEmpty()) {
+                MotoristaDAO p = new MotoristaDAO();
+                Usuario u;
+                String text = "\n";
+                while (i.hasNext()) {
+                    u = (Usuario) i.next();
+                    if (p.verificaMotorista(u.getId()) != -1) {
+                        MotoristaDAO mdao = new MotoristaDAO();
+                        Motorista m;
+                        int id = mdao.verificaMotorista(u.getId());
+                        m = mdao.buscar(id);
+                        text = text+"\nLogin: "+ m.getLogin()+"\nRegião: "+m.getRegiao()+"\n";
+                    }
+                }
+                resultadoBuscaMotorista.setText(text);
+                
+            }
+            else {
+                
+                JOptionPane.showMessageDialog(null, "Motorista não encontrado!");
+                
+            }
+        }
+    }//GEN-LAST:event_buscaNomeMotoristaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -607,11 +780,37 @@ public class telaPassageiro extends javax.swing.JFrame {
                 new telaPassageiro().setVisible(true);
             }
         });
+        
+        
     }
     
     public void recebeID (int id) {
         this.passageiroID = id;
+        PassageiroDAO pdao = new PassageiroDAO();
+        Passageiro p;
+        p = pdao.buscar(passageiroID);
+        bemVindoLabel.setText("Seja bem vindo(a) " + p.getNome()+",");
     }
+    
+    public String formatTxtForShowInTable(String txt){
+		String txtFormated = "<HTML><P ALIGN=LEFT>";		
+		String endTag = "<BR></P></HTML>";
+		String jumpTag = "<BR>";		
+		int count = 1;
+		int i = 0;
+		int lineSize = 70;
+		int tempInt = txt.length()/lineSize;
+		while (count <= tempInt){			
+			txtFormated = txtFormated + txt.substring(i, (lineSize*count)) + jumpTag;
+			i = i + lineSize;
+			count++;
+		}
+		if (txt.length()%lineSize != 0){
+			txtFormated = txtFormated + txt.substring(i);
+		}
+		txtFormated = txtFormated + endTag;
+		return txtFormated;
+	}
     
     
 
@@ -624,7 +823,8 @@ public class telaPassageiro extends javax.swing.JFrame {
     private javax.swing.JScrollPane SolicitarHorario;
     private javax.swing.JPanel Tela2;
     private javax.swing.JScrollPane TelaInicio;
-    private javax.swing.JTable enviadas;
+    private javax.swing.JLabel bemVindoLabel;
+    private javax.swing.JTextField buscaNomeMotorista;
     private javax.swing.JTextArea info;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -634,9 +834,9 @@ public class telaPassageiro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -664,9 +864,10 @@ public class telaPassageiro extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextArea resultadoBuscaMotorista;
+    private javax.swing.JComboBox<String> selecionarDia;
+    private javax.swing.JTable tabelaEnviadas;
+    private javax.swing.JTable tabelaHorarios;
+    private javax.swing.JTable tabelaRecebidas;
     // End of variables declaration//GEN-END:variables
 }

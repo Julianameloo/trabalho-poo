@@ -5,12 +5,16 @@
  */
 package views;
 
+import codigos.Mensagem;
 import codigos.Motorista;
+import codigos.Usuario;
 import codigos.Veiculo;
 import java.awt.CardLayout;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.dao.MensagemDAO;
 import model.dao.Mot_veiDAO;
 import model.dao.MotoristaDAO;
 
@@ -41,18 +45,18 @@ public class telaMotorista extends javax.swing.JFrame {
         Tela3 = new javax.swing.JPanel();
         Inicio = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        bemVindoLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         MensagensEnviadas = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         NovaMensagem = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaEnviadas = new javax.swing.JTable();
         MensagensRecebidas = new javax.swing.JScrollPane();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tabelaRecebidas = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         Informações = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
@@ -111,8 +115,7 @@ public class telaMotorista extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(245, 248, 249));
 
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        jLabel2.setText("Bem vindo(a) motorista,");
+        bemVindoLabel.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
 
         jLabel4.setText("Selecione as opções acima para navegar no aplicativo");
 
@@ -124,17 +127,17 @@ public class telaMotorista extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel2))
+                    .addComponent(bemVindoLabel))
                 .addContainerGap(166, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addContainerGap(173, Short.MAX_VALUE)
+                .addComponent(bemVindoLabel)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel4)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         Inicio.setViewportView(jPanel2);
@@ -153,7 +156,7 @@ public class telaMotorista extends javax.swing.JFrame {
 
         jLabel5.setText("Enviadas");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaEnviadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -161,14 +164,16 @@ public class telaMotorista extends javax.swing.JFrame {
                 "Destinatário", "Horário", "Mensagem"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(150);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(150);
-            jTable1.getColumnModel().getColumn(1).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(80);
+        tabelaEnviadas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        tabelaEnviadas.setRequestFocusEnabled(false);
+        jScrollPane2.setViewportView(tabelaEnviadas);
+        if (tabelaEnviadas.getColumnModel().getColumnCount() > 0) {
+            tabelaEnviadas.getColumnModel().getColumn(0).setMinWidth(150);
+            tabelaEnviadas.getColumnModel().getColumn(0).setPreferredWidth(150);
+            tabelaEnviadas.getColumnModel().getColumn(0).setMaxWidth(150);
+            tabelaEnviadas.getColumnModel().getColumn(1).setMinWidth(80);
+            tabelaEnviadas.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tabelaEnviadas.getColumnModel().getColumn(1).setMaxWidth(80);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -179,20 +184,18 @@ public class telaMotorista extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(NovaMensagem)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                        .addContainerGap(70, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(0, 626, Short.MAX_VALUE)))
-                        .addContainerGap(70, Short.MAX_VALUE))))
+                            .addComponent(NovaMensagem)
+                            .addComponent(jLabel5))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addComponent(NovaMensagem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
@@ -207,7 +210,7 @@ public class telaMotorista extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(245, 248, 249));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaRecebidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -215,14 +218,14 @@ public class telaMotorista extends javax.swing.JFrame {
                 "Remetente", "Horário", "Mensagem"
             }
         ));
-        jScrollPane7.setViewportView(jTable4);
-        if (jTable4.getColumnModel().getColumnCount() > 0) {
-            jTable4.getColumnModel().getColumn(0).setMinWidth(150);
-            jTable4.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable4.getColumnModel().getColumn(0).setMaxWidth(150);
-            jTable4.getColumnModel().getColumn(1).setMinWidth(80);
-            jTable4.getColumnModel().getColumn(1).setPreferredWidth(80);
-            jTable4.getColumnModel().getColumn(1).setMaxWidth(80);
+        jScrollPane7.setViewportView(tabelaRecebidas);
+        if (tabelaRecebidas.getColumnModel().getColumnCount() > 0) {
+            tabelaRecebidas.getColumnModel().getColumn(0).setMinWidth(180);
+            tabelaRecebidas.getColumnModel().getColumn(0).setPreferredWidth(180);
+            tabelaRecebidas.getColumnModel().getColumn(0).setMaxWidth(180);
+            tabelaRecebidas.getColumnModel().getColumn(1).setMinWidth(80);
+            tabelaRecebidas.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tabelaRecebidas.getColumnModel().getColumn(1).setMaxWidth(80);
         }
 
         jLabel11.setText("Recebidas");
@@ -619,6 +622,23 @@ public class telaMotorista extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        MensagemDAO mdao = new MensagemDAO();
+        MotoristaDAO mot = new MotoristaDAO();
+        Usuario u;
+        u = mot.buscar(motoristaID);
+        LinkedList ll = mdao.msgRecebidas(u);
+        Iterator i = ll.iterator();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaRecebidas.getModel();
+        modelo.setNumRows(0);
+        Mensagem m;
+        while (i.hasNext()) {
+            m = (Mensagem)i.next();
+            modelo.addRow(new Object[] {
+                m.getRemetente().getNome()+"("+m.getRemetente().getLogin()+")",
+                m.getDataHora(),
+                formatTxtForShowInTable(m.getConteudo())
+            });
+        }
         CardLayout cl = (CardLayout) Tela3.getLayout();
         cl.show(Tela3, "mensr");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -687,10 +707,69 @@ public class telaMotorista extends javax.swing.JFrame {
         NovaMensagemMotorista nvm = new NovaMensagemMotorista();
         nvm.setVisible(true);
         nvm.recebeID(motoristaID);
+        MensagemDAO mdao = new MensagemDAO();
+        MotoristaDAO mot = new MotoristaDAO();
+        Usuario u;
+        u = mot.buscar(motoristaID);
+        LinkedList ll = mdao.msgEnviadas(u);
+        Iterator i = ll.iterator();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaEnviadas.getModel();
+        modelo.setNumRows(0);
+        Mensagem m;
+        while (i.hasNext()) {
+            m = (Mensagem)i.next();
+            modelo.addRow(new Object[] {
+                m.getDestinatario().getNome()+"("+m.getDestinatario().getLogin()+")",
+                m.getDataHora(),
+                formatTxtForShowInTable(m.getConteudo())
+            });
+        }
     }//GEN-LAST:event_NovaMensagemActionPerformed
+
+    
+    
+    public String formatTxtForShowInTable(String txt){
+		String txtFormated = "<HTML><P ALIGN=LEFT>";		
+		String endTag = "<BR></P></HTML>";
+		String jumpTag = "<BR>";		
+		int count = 1;
+		int i = 0;
+		int lineSize = 200;
+		int tempInt = txt.length()/lineSize;
+		while (count <= tempInt){			
+			txtFormated = txtFormated + txt.substring(i, (lineSize*count)) + jumpTag;
+			i = i + lineSize;
+			count++;
+		}
+		if (txt.length()%lineSize != 0){
+			txtFormated = txtFormated + txt.substring(i);
+		}
+		txtFormated = txtFormated + endTag;
+		return txtFormated;
+	}
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
+        
+        MensagemDAO mdao = new MensagemDAO();
+        MotoristaDAO mot = new MotoristaDAO();
+        Usuario u;
+        u = mot.buscar(motoristaID);
+        LinkedList ll = mdao.msgEnviadas(u);
+        Iterator i = ll.iterator();
+        DefaultTableModel modelo = (DefaultTableModel) tabelaEnviadas.getModel();
+        modelo.setNumRows(0);
+        Mensagem m;
+        while (i.hasNext()) {
+            m = (Mensagem)i.next();
+            modelo.addRow(new Object[] {
+                m.getDestinatario().getNome()+"("+m.getDestinatario().getLogin()+")",
+                m.getDataHora(),
+                formatTxtForShowInTable(m.getConteudo())
+            });
+            tabelaEnviadas.setRowHeight(100);
+        }
+        
         CardLayout cl = (CardLayout) Tela3.getLayout();
         cl.show(Tela3, "mense");
     }//GEN-LAST:event_jMenuItem11ActionPerformed
@@ -717,6 +796,10 @@ public class telaMotorista extends javax.swing.JFrame {
 
     public void recebeID (int id) {
         this.motoristaID = id;
+        MotoristaDAO pdao = new MotoristaDAO();
+        Motorista p;
+        p = pdao.buscar(motoristaID);
+        bemVindoLabel.setText("Seja bem vindo(a) " + p.getNome()+",");
     }
     /**
      * @param args the command line arguments
@@ -765,6 +848,7 @@ public class telaMotorista extends javax.swing.JFrame {
     private javax.swing.JButton NovaMensagem;
     private javax.swing.JScrollPane RemoverPassageiro;
     private javax.swing.JPanel Tela3;
+    private javax.swing.JLabel bemVindoLabel;
     private javax.swing.JTextArea informacoes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -778,7 +862,6 @@ public class telaMotorista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
@@ -811,12 +894,12 @@ public class telaMotorista extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable tabelaEnviadas;
+    private javax.swing.JTable tabelaRecebidas;
     // End of variables declaration//GEN-END:variables
 }

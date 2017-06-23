@@ -180,6 +180,7 @@ public class NovaMensagemPassageiro extends javax.swing.JFrame {
         m.setRemetente(p);
         MensagemDAO mendao = new MensagemDAO();
         mendao.criar(m);
+        
     }//GEN-LAST:event_enviarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

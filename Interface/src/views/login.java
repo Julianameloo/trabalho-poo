@@ -851,15 +851,15 @@ public class login extends javax.swing.JFrame {
                     MotoristaDAO mdao = new MotoristaDAO();
                     idp = mdao.verificaMotorista(id);
                     telaMotorista tm = new telaMotorista();
-                    tm.setVisible(true);
                     tm.recebeID(idp);
+                    tm.setVisible(true);
                     this.dispose();
                 }
                 else {
 
                     telaPassageiro tp = new telaPassageiro();
-                    tp.setVisible(true);
                     tp.recebeID(idp);
+                    tp.setVisible(true);
                     this.dispose();
                 }
             }
@@ -880,15 +880,15 @@ public class login extends javax.swing.JFrame {
                 MotoristaDAO mdao = new MotoristaDAO();
                 idp = mdao.verificaMotorista(id);
                 telaMotorista tm = new telaMotorista();
-                tm.setVisible(true);
                 tm.recebeID(idp);
+                tm.setVisible(true);
                 this.dispose();
             }
             else {
                 
                 telaPassageiro tp = new telaPassageiro();
-                tp.setVisible(true);
                 tp.recebeID(idp);
+                tp.setVisible(true);
                 this.dispose();
             }
         }
