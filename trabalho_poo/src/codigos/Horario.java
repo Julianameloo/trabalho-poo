@@ -1,11 +1,12 @@
 package codigos;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class Horario {
     private boolean tipo;
-    private Date horaInicio;
-    private Date horaFinal;
+    private Time horaInicio;
+    private Time horaFinal;
     private int dia;
     private int id;
 
@@ -20,7 +21,7 @@ public class Horario {
     public Horario() {
     }
 
-    public Horario(boolean tipo, Date horaInicio, Date horaFinal, int dia) {
+    public Horario(boolean tipo, Time horaInicio, Time horaFinal, int dia) {
         this.tipo = tipo;
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
@@ -43,20 +44,20 @@ public class Horario {
         this.tipo = tipo;
     }
 
-    public Date getHoraInicio() {
+    public Time getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(Time horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Date getHoraFinal() {
+    public Time getHoraFinal() {
         return horaFinal;
     }
 
-    public void setHoraFinal(Date hotaFinal) {
-        this.horaFinal = hotaFinal;
+    public void setHoraFinal(Time horaFinal) {
+        this.horaFinal = horaFinal;
     }
     
     

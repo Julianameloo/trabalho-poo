@@ -39,8 +39,8 @@ public class HorarioDAO {
         try {
             stmt = con.prepareStatement("UPDATE horario SET tipo = ?, horaInicio = ?, horaFinal = ?, dia = ? WHERE  id = ?");
             stmt.setBoolean(1, h.isTipo());
-            stmt.setTime(2, (Time) h.getHoraInicio());
-            stmt.setTime(3, (Time) h.getHoraFinal());
+            stmt.setTime(2, h.getHoraInicio());
+            stmt.setTime(3, h.getHoraFinal());
             stmt.setInt(4, h.getDia());
             stmt.setInt(5, h.getId());
             stmt.executeUpdate();
@@ -80,8 +80,8 @@ public class HorarioDAO {
             if(rs.next()){
                 h.setId(rs.getInt("id"));
                 h.setDia(rs.getInt("dia"));
-                h.setHoraFinal(rs.getDate("horaFinal"));
-                h.setHoraInicio(rs.getDate("horaInicio"));
+                h.setHoraFinal(rs.getTime("horaFinal"));
+                h.setHoraInicio(rs.getTime("horaInicio"));
                 h.setTipo(rs.getBoolean("tipo"));
             }
             

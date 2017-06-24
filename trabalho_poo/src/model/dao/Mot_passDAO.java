@@ -158,4 +158,19 @@ public class Mot_passDAO {
         }
         return v;
     }
+    public void exclui(int id_motorista, int id_passageiro){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement("DELETE FROM mot_pass WHERE motorista = ? and passageiro = ?");
+            stmt.setInt(1, id_motorista);
+            stmt.setInt(2, id_passageiro);
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir");
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
 }
