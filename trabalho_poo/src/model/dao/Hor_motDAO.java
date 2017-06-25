@@ -141,6 +141,27 @@ public class Hor_motDAO {
         }
         return false;
     }
+    public int getIdHorMot(int id_mot, int id_hor){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int id = -1;
+        try {
+            stmt = con.prepareStatement("SELECT hor_mot WHERE motorista = ? and horario = ?");
+            stmt.setInt(1, id_mot);
+            stmt.setInt(1, id_hor);
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                return rs.getInt("id");
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao abrir horario");
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        return id;
+    }
     public Motorista getMotorista(int idHorMot){
         Motorista m = new Motorista();
         Connection con = ConnectionFactory.getConnection();
