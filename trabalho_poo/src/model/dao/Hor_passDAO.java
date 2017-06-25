@@ -86,11 +86,17 @@ public class Hor_passDAO {
             
             while(rs.next()){
                 HorarioDAO hdao = new HorarioDAO();
+                Hor_motDAO hmdao = new Hor_motDAO();
                 MotoristaDAO mdao = new MotoristaDAO();
                 Horario h = new Horario();
-                h = (hdao.buscar(rs.getInt("horario")));
+                h = (hmdao.getHorario(rs.getInt("hor_mot")));
                 HorarioPassageiro hp = new HorarioPassageiro();
-                hp.setMotorista(mdao.buscar(rs.getInt("motorista")));
+                hp.setMotorista(hmdao.getMotorista(rs.getInt("hor_mot")));
+                hp.setDia(h.getDia());
+                hp.setHoraInicio(h.getHoraInicio());
+                hp.setHoraFinal(h.getHoraFinal());
+                hp.setTipo(h.isTipo());
+                hp.setId(rs.getInt("id"));
                 horarios.add(hp);
             }
             
@@ -141,6 +147,11 @@ public class Hor_passDAO {
                     h = (hmdao.getHorario(rs.getInt("hor_mot")));
                     HorarioPassageiro hp = new HorarioPassageiro();
                     hp.setMotorista(hmdao.getMotorista(rs.getInt("hor_mot")));
+                    hp.setDia(h.getDia());
+                    hp.setHoraInicio(h.getHoraInicio());
+                    hp.setHoraFinal(h.getHoraFinal());
+                    hp.setTipo(h.isTipo());
+                    hp.setId(rs.getInt("id"));
                     horarios.add(hp);
                 }
             }
