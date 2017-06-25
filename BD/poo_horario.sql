@@ -29,7 +29,7 @@ CREATE TABLE `horario` (
   `horaFinal` time DEFAULT NULL,
   `dia` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `horario` (
 
 LOCK TABLES `horario` WRITE;
 /*!40000 ALTER TABLE `horario` DISABLE KEYS */;
+INSERT INTO `horario` VALUES (1,1,'20:30:00','21:45:30',1),(2,1,'08:30:00','10:45:30',2),(3,1,'08:30:00','10:45:30',2),(4,1,'08:30:00','10:45:30',2);
 /*!40000 ALTER TABLE `horario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-23  1:39:13
+-- Dump completed on 2017-06-25  2:25:25

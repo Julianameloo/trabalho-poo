@@ -8,6 +8,7 @@ package codigos;
 import java.sql.Time;
 import java.util.Iterator;
 import java.util.LinkedList;
+import model.dao.Hor_motDAO;
 import model.dao.HorarioDAO;
 import model.dao.Mot_passDAO;
 import model.dao.MotoristaDAO;
@@ -28,7 +29,11 @@ public class teste {
         HorarioDAO hdao = new HorarioDAO();
         hdao.criar(h);
         h = hdao.buscar(1);
+        Motorista m = new Motorista();
+        MotoristaDAO mdao = new MotoristaDAO();
+        m = mdao.buscar(37);
         System.out.println(h.getHoraInicio());
+        Hor_motDAO hmdao = new Hor_motDAO();
+        hmdao.criar(h, m);
     }
-    
 }
