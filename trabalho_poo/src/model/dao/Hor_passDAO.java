@@ -131,6 +131,31 @@ public class Hor_passDAO {
         }
         return passageiros;
     }
+    public LinkedList passageirosHorarioConfirmados(int idHorMot){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        LinkedList passageiros = new LinkedList();
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM hor_pass WHERE hor_mot = ? and confirmado = ?");
+            stmt.setInt(1, idHorMot);
+            stmt.setBoolean(2, true);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Passageiro p = new Passageiro();
+                PassageiroDAO pdao = new PassageiroDAO();
+                p = (pdao.buscar(rs.getInt("passageiro")));
+                passageiros.add(p);
+            }
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return passageiros;
+    }
     public LinkedList horariosParaConfirmar(int id_passageiro){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

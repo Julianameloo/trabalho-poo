@@ -91,12 +91,23 @@ public class Hor_motDAO {
     public void abrirConfirmacao(int id_motorista, int id_horario){ //Pode colocar um botão tipo on/off, quando mudar pra on chama esse metodo, off o fechar
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+        LinkedList passageiros = new LinkedList();
         try {
             stmt = con.prepareStatement("UPDATE hor_mot SET aberto = ? WHERE motorista = ? and horario = ?");
             stmt.setBoolean(1, true);
             stmt.setInt(2, id_motorista);
             stmt.setInt(3, id_horario);
             stmt.executeUpdate();
+            Hor_motDAO hmdao = new Hor_motDAO();
+            Hor_passDAO hpdao = new Hor_passDAO();
+            int idHorMot = hmdao.getIdHorMot(id_motorista, id_horario);
+            passageiros = hpdao.passageirosHorario(idHorMot);
+            Iterator i = passageiros.iterator();
+            while(i.hasNext()){
+                Passageiro p = new Passageiro();
+                p = (Passageiro) i.next();
+                hpdao.desconfirmarHorario(idHorMot, p.getId_passageiro());
+            }
             JOptionPane.showMessageDialog(null, "Horário aberto!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao abrir horario");
@@ -105,22 +116,26 @@ public class Hor_motDAO {
         }
         
     }
-    public void fecharConfirmacao(int id_motorista, int id_horario){
+    public LinkedList fecharConfirmacao(int id_motorista, int id_horario){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+        LinkedList confirmados = new LinkedList();
         try {
             stmt = con.prepareStatement("UPDATE hor_mot SET aberto = ? WHERE motorista = ? and horario = ?");
             stmt.setBoolean(1, false);
             stmt.setInt(2, id_motorista);
             stmt.setInt(3, id_horario);
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Horário aberto!");
+            JOptionPane.showMessageDialog(null, "Horário fechado!");
+            Hor_passDAO hpdao = new Hor_passDAO();
+            Hor_motDAO hmdao = new Hor_motDAO();
+            confirmados = hpdao.passageirosHorarioConfirmados(hmdao.getIdHorMot(id_motorista, id_horario));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao abrir horario");
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
-        
+        return confirmados;
     }
     public boolean estaAberto(int idHorMot){
         Connection con = ConnectionFactory.getConnection();
