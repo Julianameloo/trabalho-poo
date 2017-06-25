@@ -31,7 +31,7 @@ public class Hor_passDAO {
             stmt.setBoolean(4, permanente);
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+            throw new RuntimeException("Erro ao criar no Banco de Dados: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -48,7 +48,7 @@ public class Hor_passDAO {
             stmt.setInt(2, id_passageiro);
             rs = stmt.executeQuery();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir");
+            throw new RuntimeException("Erro ao excluir no Banco de Dados: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
@@ -174,7 +174,7 @@ public class Hor_passDAO {
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Horário confirmado!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao confirmar horario");
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -191,7 +191,7 @@ public class Hor_passDAO {
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Horário desconfirmado!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao desconfirmar horario");
+            throw new RuntimeException("Erro ao buscar no Banco de Dados: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }

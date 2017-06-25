@@ -127,7 +127,7 @@ public class Hor_motDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = con.prepareStatement("SELECT hor_mot WHERE id = ?");
+            stmt = con.prepareStatement("SELECT * FROM hor_mot WHERE id = ?");
             stmt.setInt(1, idHorMot);
             rs = stmt.executeQuery();
             if(rs.next()){
@@ -147,7 +147,7 @@ public class Hor_motDAO {
         ResultSet rs = null;
         int id = -1;
         try {
-            stmt = con.prepareStatement("SELECT hor_mot WHERE motorista = ? and horario = ?");
+            stmt = con.prepareStatement("SELECT * FROM hor_mot WHERE motorista = ? and horario = ?");
             stmt.setInt(1, id_mot);
             stmt.setInt(1, id_hor);
             rs = stmt.executeQuery();
@@ -168,11 +168,13 @@ public class Hor_motDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = con.prepareStatement("SELECT hor_mot WHERE id = ?");
+            stmt = con.prepareStatement("SELECT * FROM hor_mot WHERE id = ?");
             stmt.setInt(1, idHorMot);
             rs = stmt.executeQuery();
-            MotoristaDAO mdao = new MotoristaDAO();
-            m = mdao.buscar(rs.getInt("motorista"));
+            if(rs.next()){
+                MotoristaDAO mdao = new MotoristaDAO();
+                m = mdao.buscar(rs.getInt("motorista"));
+            }
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar motorista: ");
@@ -188,7 +190,7 @@ public class Hor_motDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            stmt = con.prepareStatement("SELECT hor_mot WHERE id = ?");
+            stmt = con.prepareStatement("SELECT * FROM hor_mot WHERE id = ?");
             stmt.setInt(1, idHorMot);
             rs = stmt.executeQuery();
             if(rs.next()){

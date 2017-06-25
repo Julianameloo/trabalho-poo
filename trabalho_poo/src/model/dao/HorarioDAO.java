@@ -27,7 +27,7 @@ public class HorarioDAO {
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+            throw new RuntimeException("Erro ao cadastrar no Banco de Dados: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -46,7 +46,7 @@ public class HorarioDAO {
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Atualização feita com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar");
+            throw new RuntimeException("Erro ao atualizar no Banco de Dados: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -61,7 +61,7 @@ public class HorarioDAO {
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir");
+            throw new RuntimeException("Erro ao excluir no Banco de Dados: ", ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
