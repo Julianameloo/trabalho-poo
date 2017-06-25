@@ -19,21 +19,26 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 public class Hor_motDAO {
-    public void criar(Horario h, Motorista m){
+    public int criar(Horario h, Motorista m){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+        int id = -1;
         try {
             stmt = con.prepareStatement("INSERT INTO hor_mot (horario, motorista, aberto)VALUES(?, ?, ?)");
             stmt.setInt(1, h.getId());
             stmt.setInt(2, m.getId_motorista());
             stmt.setBoolean(3, false);
-            stmt.executeUpdate();
+            id = stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()){
+                id = rs.getInt(1);
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
-        
+        return id;
     }
     public void excluir(int id_horario, int id_motorista){
         Connection con = ConnectionFactory.getConnection();
