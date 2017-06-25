@@ -175,7 +175,7 @@ public class Hor_motDAO {
             m = mdao.buscar(rs.getInt("motorista"));
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao abrir horario");
+            JOptionPane.showMessageDialog(null, "Erro ao buscar motorista: ");
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -191,11 +191,14 @@ public class Hor_motDAO {
             stmt = con.prepareStatement("SELECT hor_mot WHERE id = ?");
             stmt.setInt(1, idHorMot);
             rs = stmt.executeQuery();
-            HorarioDAO hdao = new HorarioDAO();
-            h = hdao.buscar(rs.getInt("horario"));
+            if(rs.next()){
+                HorarioDAO hdao = new HorarioDAO();
+                h = hdao.buscar(rs.getInt("horario"));
+            }
+            
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao abrir horario");
+            JOptionPane.showMessageDialog(null, "Erro ao buscar horario");
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
