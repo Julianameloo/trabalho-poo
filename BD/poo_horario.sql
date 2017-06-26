@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
--- Host: localhost    Database: poo
+-- Host: 127.0.0.1    Database: poo
 -- ------------------------------------------------------
--- Server version	5.7.18-log
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `horario` (
   `horaFinal` time DEFAULT NULL,
   `dia` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `horario` (
 
 LOCK TABLES `horario` WRITE;
 /*!40000 ALTER TABLE `horario` DISABLE KEYS */;
-INSERT INTO `horario` VALUES (1,1,'20:30:00','21:45:30',1),(2,1,'08:30:00','10:45:30',2),(3,1,'08:30:00','10:45:30',2),(4,1,'08:30:00','10:45:30',2);
+INSERT INTO `horario` VALUES (1,1,'20:30:00','21:45:30',1),(2,1,'08:30:00','10:45:30',2),(3,1,'08:30:00','10:45:30',2),(4,1,'08:30:00','10:45:30',2),(5,1,'07:20:00','08:00:00',2),(6,1,'07:00:00','08:00:00',2),(7,1,'07:20:00','08:00:00',2),(8,1,'07:20:00','08:00:00',2),(9,1,'07:20:00','08:00:00',3),(10,1,'17:00:00','18:30:00',3);
 /*!40000 ALTER TABLE `horario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-25  2:25:25
+-- Dump completed on 2017-06-26 15:44:01

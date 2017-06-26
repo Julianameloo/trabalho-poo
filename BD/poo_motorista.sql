@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
--- Host: localhost    Database: poo
+-- Host: 127.0.0.1    Database: poo
 -- ------------------------------------------------------
--- Server version	5.7.18-log
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `motorista` (
   PRIMARY KEY (`id`),
   KEY `usuario1_idx` (`usuario`),
   CONSTRAINT `usu` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `motorista` (
 
 LOCK TABLES `motorista` WRITE;
 /*!40000 ALTER TABLE `motorista` DISABLE KEYS */;
-INSERT INTO `motorista` VALUES (37,41,'leste'),(39,42,'leste'),(42,44,'leste'),(44,45,'leste');
+INSERT INTO `motorista` VALUES (37,41,'leste'),(39,42,'leste'),(42,44,'leste'),(44,45,'leste'),(45,66,'Leste Universitário');
 /*!40000 ALTER TABLE `motorista` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-25  2:25:29
+-- Dump completed on 2017-06-26 15:44:01

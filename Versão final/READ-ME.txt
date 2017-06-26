@@ -1,0 +1,9 @@
+Os arquivos da versão final são os retirados do projeto do netbeans, logo, podem apenas ser colocados em um projeto. Toda a aplicação funciona através da classe login.java, que está em views, o que deve ser aberto primeiro, tendo acesso a todo o aplicativo.
+Para que o aplicativo funcione, o banco de dados deve ser conectado, as tabelas usadas estão na pasta BD, são 13 tabelas ao todo.
+Após isso o aplicativo é bem intuitivo. Pode-se apenas usá-lo.
+Existem também os diagramas especificados na pasta.
+
+IMPORTANTE: Os slides foram feitos através de um site, portanto devem ser acessados online.
+Aqui está o link:
+
+https://prezi.com/qbikokufawck/aplicativo-para-van/

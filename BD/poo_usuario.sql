@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
--- Host: localhost    Database: poo
+-- Host: 127.0.0.1    Database: poo
 -- ------------------------------------------------------
--- Server version	5.7.18-log
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -33,7 +33,7 @@ CREATE TABLE `usuario` (
   `dataDeNascimento` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (40,'eai','aa','12e1da','0','0','ascca ',NULL),(41,'eai','ao','12e1da','0','1','ascca ',NULL),(42,'eai','o','12e1da','0','1','ascca ',NULL),(44,'eai','fds','12e1da','0','1','ascca ',NULL),(45,'eai','fs','12e1da','0','1','ascca ',NULL),(47,'eai ','f','12e1da','0','1','ascca ',NULL),(65,'u','fa','12e1da','0','1','ascca ',NULL);
+INSERT INTO `usuario` VALUES (40,'eai','aa','12e1da','0','0','ascca ',NULL),(41,'eai','ao','12e1da','0','1','ascca ',NULL),(42,'eai','o','12e1da','0','1','ascca ',NULL),(44,'eai','fds','12e1da','0','1','ascca ',NULL),(45,'eai','fs','12e1da','0','1','ascca ',NULL),(47,'eai ','f','12e1da','0','1','ascca ',NULL),(65,'u','fa','12e1da','0','1','ascca ',NULL),(66,'Maurício Antônio','mantonio','senha','872.897.682-72','75605-000','Setor Universitário','1970-12-12'),(67,'Maria das Dores','mdores','senha','041.158.691-27','19247-384','Setor Goiânia II','1998-09-08'),(68,'João Sousa','jsousa','senha','074.428.455-41','98798-788','Setor Leste Universitário','1997-12-12');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-25  2:25:24
+-- Dump completed on 2017-06-26 15:44:01

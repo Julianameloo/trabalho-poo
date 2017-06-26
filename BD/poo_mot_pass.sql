@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
--- Host: localhost    Database: poo
+-- Host: 127.0.0.1    Database: poo
 -- ------------------------------------------------------
--- Server version	5.7.18-log
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `mot_pass` (
   KEY `passageiro_idx` (`passageiro`),
   CONSTRAINT `motorista` FOREIGN KEY (`motorista`) REFERENCES `motorista` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `passageiro` FOREIGN KEY (`passageiro`) REFERENCES `passageiro` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `mot_pass` (
 
 LOCK TABLES `mot_pass` WRITE;
 /*!40000 ALTER TABLE `mot_pass` DISABLE KEYS */;
-INSERT INTO `mot_pass` VALUES (25,44,1,1);
+INSERT INTO `mot_pass` VALUES (25,44,1,1),(26,45,19,1),(27,45,18,1);
 /*!40000 ALTER TABLE `mot_pass` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-25  2:25:21
+-- Dump completed on 2017-06-26 15:44:01

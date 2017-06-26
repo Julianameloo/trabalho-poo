@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
--- Host: localhost    Database: poo
+-- Host: 127.0.0.1    Database: poo
 -- ------------------------------------------------------
--- Server version	5.7.18-log
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,7 +28,7 @@ CREATE TABLE `veiculo` (
   `placa` varchar(45) DEFAULT NULL,
   `capacidade` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
-INSERT INTO `veiculo` VALUES (18,'van','sfsvav',10),(19,'van','sfsvav',10),(20,'van','sfsvav',10),(21,'van','sfsvav',10),(22,'van','sfsvav',10),(23,'van','sfsvav',10),(24,'van','sfsvav',10),(25,'van','sfsvav',10),(26,'van','sfsvav',10),(27,'van','sfsvav',10),(28,'van','sfsvav',10),(29,'van','sfsvav',10),(30,'van','sfsvav',10),(31,'van','sfsvav',10),(32,'van','sfsvav',10),(33,'van','sfsvav',10),(34,'van','sfsvav',10),(35,'van','sfsvav',10),(36,'van','sfsvav',10),(37,'van','sfsvav',10),(38,'van','sfsvav',10),(39,'van','sfsvav',10);
+INSERT INTO `veiculo` VALUES (18,'van','sfsvav',10),(19,'van','sfsvav',10),(20,'van','sfsvav',10),(21,'van','sfsvav',10),(22,'van','sfsvav',10),(23,'van','sfsvav',10),(24,'van','sfsvav',10),(25,'van','sfsvav',10),(26,'van','sfsvav',10),(27,'van','sfsvav',10),(28,'van','sfsvav',10),(29,'van','sfsvav',10),(30,'van','sfsvav',10),(31,'van','sfsvav',10),(32,'van','sfsvav',10),(33,'van','sfsvav',10),(34,'van','sfsvav',10),(35,'van','sfsvav',10),(36,'van','sfsvav',10),(37,'van','sfsvav',10),(38,'van','sfsvav',10),(39,'van','sfsvav',10),(40,'Van','ABC-1230',15);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-25  2:25:27
+-- Dump completed on 2017-06-26 15:44:01

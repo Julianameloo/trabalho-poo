@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
--- Host: localhost    Database: poo
+-- Host: 127.0.0.1    Database: poo
 -- ------------------------------------------------------
--- Server version	5.7.18-log
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `hor_mot` (
   KEY `hor_idx` (`horario`),
   CONSTRAINT `hor` FOREIGN KEY (`horario`) REFERENCES `horario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `mot` FOREIGN KEY (`motorista`) REFERENCES `motorista` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `hor_mot` (
 
 LOCK TABLES `hor_mot` WRITE;
 /*!40000 ALTER TABLE `hor_mot` DISABLE KEYS */;
-INSERT INTO `hor_mot` VALUES (1,1,37,0),(2,1,37,0);
+INSERT INTO `hor_mot` VALUES (1,1,37,0),(2,1,37,0),(7,9,45,0),(8,10,45,0);
 /*!40000 ALTER TABLE `hor_mot` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-25  2:24:33
+-- Dump completed on 2017-06-26 15:44:01
