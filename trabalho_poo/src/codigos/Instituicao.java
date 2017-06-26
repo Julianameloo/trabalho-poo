@@ -13,15 +13,6 @@ public class Instituicao {
     public void setId(int id) {
         this.id = id;
     }
-        
-    public Instituicao(String nome, String endereco, String tipo) {
-        this.nome = nome;
-        this.endereco = endereco;
-        this.tipo = tipo;
-    }
-
-    public Instituicao() {
-    }
 
     public String getNome() {
         return nome;

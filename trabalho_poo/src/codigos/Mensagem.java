@@ -7,7 +7,7 @@ public class Mensagem {
     private Usuario remetente;
     private Usuario destinatario;
     private Date dataHora;
-    int id;
+    private int id;
 
     public Date getDataHora() {
         return dataHora;

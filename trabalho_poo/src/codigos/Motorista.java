@@ -1,6 +1,5 @@
 package codigos;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Motorista extends Usuario {
@@ -10,52 +9,28 @@ public class Motorista extends Usuario {
     private LinkedList horarios;
     private int id_motorista;    
 
+    public LinkedList getPassageiros() {
+        return passageiros;
+    }
+
+    public void setPassageiros(LinkedList passageiros) {
+        this.passageiros = passageiros;
+    }
+
+    public LinkedList getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(LinkedList horarios) {
+        this.horarios = horarios;
+    }
+
     public int getId_motorista() {
         return id_motorista;
     }
 
     public void setId_motorista(int id) {
         this.id_motorista = id;
-    }
-
-    public Motorista() {
-    }
-
-    public Motorista(Veiculo veiculoDeTransporte, String regiao) {
-        this.veiculoDeTransporte = veiculoDeTransporte;
-        this.regiao = regiao;
-    }
-    
-    public void addPassageiro (Passageiro passageiro) {
-        
-    }
-    
-    public void removePassageiro (Passageiro passageiro) {
-        
-    }
-    
-    public void addHorario (HorarioMotorista horario) {
-        
-    }
-    
-    public void gerarRota (HorarioMotorista horario) {
-        
-    }
-    
-    public void mostrarHorarios (){
-        
-    }
-    
-    public void buscarPassageiro (Passageiro passageiro) {
-        
-    }
-    
-    public void buscarPassageiro (HorarioMotorista horario) {
-        
-    }
-    
-    public void buscarPassageiro (Instituicao instituicao) {
-        
     }
 
     public Veiculo getVeiculoDeTransporte() {

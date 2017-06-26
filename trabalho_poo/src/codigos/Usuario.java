@@ -13,7 +13,7 @@ public class Usuario {
     private String enderecoResidencia;
     private LinkedList instituicoes;
     private String cep;
-    private Mensagem mensagens;
+    private LinkedList mensagens;
     private int id;
 
     public int getId() {
@@ -23,41 +23,22 @@ public class Usuario {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public Usuario() {
+    public LinkedList getInstituicoes() {
+        return instituicoes;
     }
 
-    public Usuario(String nome, Date dataDeNascimento, String login, String senha, String cpf, String enderecoResidencia, String cep, Mensagem mensagens) {
-        this.nome = nome;
-        this.dataDeNascimento = dataDeNascimento;
-        this.login = login;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.enderecoResidencia = enderecoResidencia;
-        this.cep = cep;
+    public void setInstituicoes(LinkedList instituicoes) {
+        this.instituicoes = instituicoes;
+    }
+
+    public LinkedList getMensagens() {
+        return mensagens;
+    }
+
+    public void setMensagens(LinkedList mensagens) {
         this.mensagens = mensagens;
     }
     
-    public void mudarSenha (String senhaAntiga, String senhaNova) {
-        
-    }   
-    
-    public void addInstituicao (Instituicao instituicao) {
-        
-    }
-    
-    public void removeInstituicao (Instituicao instituicao) {
-        
-    }
-    
-    public void enviarMensagem (String mensagem, Usuario destinatario) {
-        
-    }
-    
-    public void addMensagem (Mensagem mensagem) {
-        
-    }
-
     public String getNome() {
         return nome;
     }

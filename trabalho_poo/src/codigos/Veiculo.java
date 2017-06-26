@@ -13,15 +13,6 @@ public class Veiculo {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public Veiculo() {
-    }
-
-    public Veiculo(String modelo, String placa, int capacidade) {
-        this.modelo = modelo;
-        this.placa = placa;
-        this.capacidade = capacidade;
-    }
 
     public String getModelo() {
         return modelo;

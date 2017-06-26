@@ -6,6 +6,14 @@ public class Passageiro extends Usuario{
     private LinkedList horarios;
     private int id_passageiro;
 
+    public LinkedList getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(LinkedList horarios) {
+        this.horarios = horarios;
+    }
+
     public int getId_passageiro() {
         return id_passageiro;
     }
@@ -13,27 +21,5 @@ public class Passageiro extends Usuario{
     public void setId_passageiro(int id) {
         this.id_passageiro = id;
     }
-
-    public Passageiro() {
-    }
     
-    public void addHorario (HorarioPassageiro horario) {
-        
-    }
-    
-    public void mostrarHorarios () {
-        
-    }
-    
-    public void buscarMotorista (String regiao) {
-        
-    }
-    
-    public void buscarMotorista (Motorista motorista) {
-        
-    }
-    
-    public void solicitarHorario (Horario horario, Motorista motorista) {
-        
-    }
 }
